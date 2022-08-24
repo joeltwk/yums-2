@@ -18,4 +18,17 @@ user = User.create!(
   role: 'regular'
 )
 
+puts "destroying restaurants..."
+
+Restaurant.destroy_all
+
+puts "creating restaurants..."
+
+restaurant = Restaurant.create!(
+  name: 'Brotzeit',
+  address: 'Clarke Quay',
+  cuisine: 'German',
+  description: 'Tasty schnitzel and pork knuckle'
+)
+
 puts "Done"
