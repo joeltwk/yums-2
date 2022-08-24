@@ -13,7 +13,17 @@ User.destroy_all
 puts "creating user..."
 
 user = User.create!(
+  name: 'Test Account',
+  role: 'regular',
   email: 'test@email.com',
+  password: 'Password123',
+  role: 'regular'
+)
+
+user2 = User.create!(
+  name: 'Test Owner',
+  role: 'owner',
+  email: 'owner@email.com',
   password: 'Password123'
 )
 
