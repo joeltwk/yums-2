@@ -14,7 +14,8 @@ puts "creating user..."
 
 user = User.create!(
   email: 'test@email.com',
-  password: 'Password123'
+  password: 'Password123',
+  role: 'regular'
 )
 
 puts "Done"
