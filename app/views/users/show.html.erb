@@ -2,8 +2,8 @@
 
 <h3><%= @user.name %></h3>
 <% if @user.role === "owner" %>
-  <%= link_to "More", restaurants_path %>
+  <%= link_to "My Restaurants", restaurants_path %>
 <% else %>
-<%= link_to "More", review_path %>
+<%= link_to "My Reviews", review_path %>
 <% end %>
 <h4>About</h4>
