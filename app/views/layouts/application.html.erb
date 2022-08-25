@@ -1,20 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Yums2</title>
+    <title>Yums App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%# <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
   </head>
 
   <body>
+    <nav class="navbar justify-content-start">
+      <a class="navbar-brand mx-3" href="/"><img src="https://res.cloudinary.com/heefang/image/upload/v1661357606/yum_icon_white_xa7lyn.png" alt="YUMS.SG"></a>
+      <%# <a class="navbar-brand mx-3" href="/"><i class="fa-solid fa-utensils"></i></a> %>
+      <a class="nav-link mx-2" href="/restaurants">All Restaurants</a>
+      <a class="nav-link mx-2" href="/restaurants/new">Add Restaurant</a>
+    </nav>
     <%# flash messages %>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
     <%# end of flash messages %>
-    <%= yield %>
+    <div class="container">
+      <%= yield %>
+    </div>
   </body>
 </html>
