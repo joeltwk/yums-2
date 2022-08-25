@@ -1,4 +1,9 @@
 class ReviewsController < ApplicationController
+  before_action :set_restaurant, only: %i[new create]
+
+  def show
+    @reviews = Review.all
+  end
 
   def new
     @review = Review.new
@@ -6,14 +11,13 @@ class ReviewsController < ApplicationController
 
   def create
     @review = Review.new(review_params)
-    @review.user = set_user
-    @review.save
-  end
-
-  def edit
-  end
-
-  def update
+    @review.user = current_user
+    @review.restaurant = @restaurant
+    if @review.save
+      redirect_to restaurant_path(@restaurant)
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   private
@@ -22,7 +26,7 @@ class ReviewsController < ApplicationController
     params.require(:review).permit(:comment, :rating)
   end
 
-  def set_user
-    @review = Review.find(params[:user_id])
+  def set_restaurant
+    @restaurant = Restaurant.find(params[:restaurant_id])
   end
 end
