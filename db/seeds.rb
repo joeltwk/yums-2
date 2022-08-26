@@ -19,25 +19,34 @@ user = User.create!(
   role: 'regular'
 )
 
-<<<<<<< HEAD
+user2 = User.create!(
+  name: 'Test Owner',
+  role: 'owner',
+  email: 'owner@email.com',
+  password: 'Password123'
+)
+
+puts "Done"
+
+# Restaurant Seed Data
 puts "destroying restaurants..."
 
 Restaurant.destroy_all
 
 puts "creating restaurants..."
 
-restaurant = Restaurant.create!(
+restaurant1 = Restaurant.create!(
   name: 'Brotzeit',
-  address: 'Clarke Quay',
+  address: '1 HarbourFront Walk, #01-149 VivoCity, Singapore 098585',
   cuisine: 'German',
-  description: 'Tasty schnitzel and pork knuckle'
-=======
-user2 = User.create!(
-  name: 'Test Owner',
-  role: 'owner',
-  email: 'owner@email.com',
-  password: 'Password123'
->>>>>>> 9070c69f677493d2693bbb9493fc5c16c640960c
+  description: 'Brotzeit is a German restaurants serving authentic and traditional German cuisine & beer in Singapore.'
+)
+
+restaurant2 = Restaurant.create!(
+  name: 'Ri Ri Hong Ma La Xiang Guo',
+  address: "32 Market Road, #01-042/052, People's Park Food Centre, Singapore 050032",
+  cuisine: 'Chinese',
+  description: "Everyone's favourite Sze Chuan local dish serving in Chinatown."
 )
 
 puts "Done"
