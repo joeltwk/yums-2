@@ -1,7 +1,15 @@
 class RestaurantsController < ApplicationController
-  def show
+  def index
+    @restaurants = Restaurant.all
   end
 
-  def index
+  def show
+    @restaurant = Restaurant.find(params[:id])
+  end
+
+  private
+
+  def restaurant_params
+    params.require(:restaurant).permit(:name, :address, :cuisine, :description)
   end
 end
