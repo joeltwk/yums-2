@@ -38,6 +38,7 @@ restaurant = Restaurant.create!(
   Commonwealth Capital Building
   Singapore 618291',
   cuisine: 'Italian',
+  user: user2,
   description: 'From hearty pastas and pizzas to delectable desserts,
   theres definitely something to satisfy your tastebuds. '
 )
@@ -46,6 +47,7 @@ restaurant2 = Restaurant.create!(
   name: 'Marutama Ramen',
   address: '6 Eu Tong Sen Street #03-90/91 The Central Singapore 059817',
   cuisine: 'Japanese',
+  user: user2,
   description: 'Skilled noodle craftsmen pursue noodles that go well with
   the rich chicken broth, achieving a perfect balance between the broth and
   noodles. Specially selected aromatic flour directly from Japan is used.'
