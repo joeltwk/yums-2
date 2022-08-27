@@ -7,6 +7,11 @@
   resolved "https://registry.yarnpkg.com/@discoveryjs/json-ext/-/json-ext-0.5.7.tgz#1d572bfbbe14b7704e0ba0f39b74815b84870d70"
   integrity sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==
 
+"@hotwired/stimulus-webpack-helpers@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@hotwired/stimulus-webpack-helpers/-/stimulus-webpack-helpers-1.0.1.tgz#4cd74487adeca576c9865ac2b9fe5cb20cef16dd"
+  integrity sha512-wa/zupVG0eWxRYJjC1IiPBdt3Lruv0RqGN+/DTMmUWUyMAEB27KXmVY6a8YpUVTM7QwVuaLNGW4EqDgrS2upXQ==
+
 "@hotwired/stimulus@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@hotwired/stimulus/-/stimulus-3.1.0.tgz#20215251e5afe6e0a3787285181ba1bfc9097df0"
@@ -455,6 +460,11 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+hotkeys-js@>=3:
+  version "3.9.5"
+  resolved "https://registry.yarnpkg.com/hotkeys-js/-/hotkeys-js-3.9.5.tgz#8314d0522bf2601e36003213047e9dc7d56d19fe"
+  integrity sha512-T0G8CUZ6Q1IOgPnLK1hDXR8DqgKF/VWEsHvZgi6CM7Ub9oOAzvWuJ3Qhc/9nFQaR26MfFOZSwULHrtCnsUX7zA==
+
 import-local@^3.0.2:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/import-local/-/import-local-3.1.0.tgz#b4479df8a5fd44f6cdce24070675676063c95cb4"
@@ -500,6 +510,11 @@ jest-worker@^27.4.5:
     "@types/node" "*"
     merge-stream "^2.0.0"
     supports-color "^8.0.0"
+
+jquery@^3.6.0:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.0.tgz#c72a09f15c1bdce142f49dbf1170bdf8adac2470"
+  integrity sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw==
 
 json-parse-even-better-errors@^2.3.1:
   version "2.3.1"
@@ -601,6 +616,11 @@ pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
+popper.js@^1.16.1:
+  version "1.16.1"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.16.1.tgz#2a223cb3dc7b6213d740e40372be40de43e65b1b"
+  integrity sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ==
+
 punycode@^2.1.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
@@ -693,6 +713,20 @@ source-map@^0.6.0:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
   integrity sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==
+
+stimulus-dropdown@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/stimulus-dropdown/-/stimulus-dropdown-2.0.0.tgz#3d401e418be21787f182c0de4bf0d2fd91cfbf8e"
+  integrity sha512-3VUZ4TI9qHvzw+sOEX1oQA8Pw8C/K5yI+oltr5B9DTwFzuJrFZRWR33OK3ERllzZep+quvHZZljIpIRifKCmCg==
+  dependencies:
+    stimulus-use "^0.50.0-2"
+
+stimulus-use@^0.50.0-2:
+  version "0.50.0"
+  resolved "https://registry.yarnpkg.com/stimulus-use/-/stimulus-use-0.50.0.tgz#0bae92fbb1fd961cbb23569f9edd12ae642ce4a6"
+  integrity sha512-9NScZQiOycQdzh8VZ15pxk6ep/a22fgha2halOvZFpJITC4nsTbWlO7D1hm+9LspFxa5b28tQhm3XkbH/qAlGw==
+  dependencies:
+    hotkeys-js ">=3"
 
 supports-color@^8.0.0:
   version "8.1.1"

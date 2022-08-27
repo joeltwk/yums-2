@@ -1,6 +1,11 @@
-<div class="container text-warning">
-  <h1><%= @restaurant.name %><br></h1>
-  <%= @restaurant.address %><br>
-  <%= @restaurant.cuisine %><br>
-  <%= @restaurant.description %><br>
-</div>
+
+<h1><b><%= @restaurant.name %></b></h1>
+<%= cl_image_tag @restaurant.photo.key, height: 300, width: 450, crop: :fill %>
+<h5><%= @restaurant.address %></h5>
+<p>Cuisine: <%= @restaurant.cuisine %></p>
+<p><%= @restaurant.description %></p>
+<%= link_to "Edit Restaurant", edit_restaurant_path(@restaurant) %>
+<%= link_to "Delete",
+  restaurant_path(@restaurant),
+  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+<%# suggest to include cusine, pictures, location and favourite %>
