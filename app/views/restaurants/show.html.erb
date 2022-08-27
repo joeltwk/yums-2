@@ -2,7 +2,19 @@
 <h5><%= @restaurant.address %></h5>
 <p>Cuisine: <%= @restaurant.cuisine %></p>
 <p><%= @restaurant.description %></p>
-<%= link_to "Edit Restaurant", edit_restaurant_path(@restaurant) %>
-<%= link_to "Delete",
-  restaurant_path(@restaurant),
-  data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %>
+<% if current_user.role === 'owner' %>
+  <%= link_to "Edit Restaurant", edit_restaurant_path(@restaurant) %>
+  <%= link_to "Delete",
+    restaurant_path(@restaurant),
+    data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+  %>
+<% else %>
+  <%= link_to "Add a Review", new_restaurant_review_path(@restaurant) %>
+<% end %>
+
+<h5>Reviews</h5>
+<% @reviews.each do |review| %>
+  <p>Rating: <%= review.rating %></p>
+  <p><%= review.comment %></p>
+  <p>From: <%= review.user.name %></p>
+<% end %>
