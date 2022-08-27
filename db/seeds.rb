@@ -26,27 +26,31 @@ user2 = User.create!(
   password: 'Password123'
 )
 
-puts "Done"
-
-# Restaurant Seed Data
 puts "destroying restaurants..."
 
 Restaurant.destroy_all
 
-puts "creating restaurants..."
+puts "creating restaurant..."
 
-restaurant1 = Restaurant.create!(
-  name: 'Brotzeit',
-  address: '1 HarbourFront Walk, #01-149 VivoCity, Singapore 098585',
-  cuisine: 'German',
-  description: 'Brotzeit is a German restaurants serving authentic and traditional German cuisine & beer in Singapore.'
+restaurant = Restaurant.create!(
+  name: 'Pasta Mania',
+  address: '7 Buroh Lane, #06-02
+  Commonwealth Capital Building
+  Singapore 618291',
+  cuisine: 'Italian',
+  user: user2,
+  description: 'From hearty pastas and pizzas to delectable desserts,
+  theres definitely something to satisfy your tastebuds. '
 )
 
 restaurant2 = Restaurant.create!(
-  name: 'Ri Ri Hong Ma La Xiang Guo',
-  address: "32 Market Road, #01-042/052, People's Park Food Centre, Singapore 050032",
-  cuisine: 'Chinese',
-  description: "Everyone's favourite Sze Chuan local dish serving in Chinatown."
+  name: 'Marutama Ramen',
+  address: '6 Eu Tong Sen Street #03-90/91 The Central Singapore 059817',
+  cuisine: 'Japanese',
+  user: user2,
+  description: 'Skilled noodle craftsmen pursue noodles that go well with
+  the rich chicken broth, achieving a perfect balance between the broth and
+  noodles. Specially selected aromatic flour directly from Japan is used.'
 )
 
 restaurant3 = Restaurant.create!(
