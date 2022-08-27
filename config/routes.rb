@@ -6,6 +6,9 @@ Rails.application.routes.draw do
   get "my-account", to: "pages#profile"
   # Defines the root path route ("/")
   # root "articles#index"
-  resources :restaurants
+  resources :restaurants do
+    resources :reviews, only: [:index, :new, :create]
+  end
   resources :users, only: [:show]
+  resources :reviews, only: [:show, :edit, :update]
 end
