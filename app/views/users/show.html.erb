@@ -1,4 +1,9 @@
 <h2>My Profile</h2>
 
 <h3><%= @user.name %></h3>
+<% if @user.role === "owner" %>
+  <%= link_to "My Restaurants", restaurants_path %>
+<% else %>
+<%= link_to "My Reviews", review_path %>
+<% end %>
 <h4>About</h4>
