@@ -57,6 +57,7 @@ restaurant3 = Restaurant.create!(
   name: "Waa Cow!",
   address: "Marina One. 5 Straits View, #01-09. Marina One The Heart West Tower, Singapore 018935",
   cuisine: 'Japanese',
+  user: user2,
   description: "Waa Cow! serves one of the best and most affordable flame-torched wagyu beef bowls in Singapore"
 )
 
@@ -64,6 +65,7 @@ restaurant4 = Restaurant.create!(
   name: "Coucou",
   address: "9 Craig Road, #01-01, Singapore 089669",
   cuisine: "Swiss",
+  user: user2,
   description: "Bringing you the best of Swiss Cuisine"
 )
 
@@ -71,6 +73,7 @@ restaurant5 = Restaurant.create!(
   name: "Obba BBQ",
   address: "63 Tg Pagar Rd, Singapore 088484",
   cuisine: "Korean",
+  user: user2,
   description: "Korean grill dishes served in a popular, warm restaurant that has booths & tabletop BBQs."
 )
 
@@ -78,6 +81,7 @@ restaurant6 = Restaurant.create!(
   name: "W39 Bistro & Bakery",
   address: "39 Jalan Mas Puteh, Singapore 128637",
   cuisine: "Local",
+  user: user2,
   description: "Sweet & savoury delights from finger bites to salads & main meals. The perfect compliment to any occasion!"
 )
 puts "Done"
