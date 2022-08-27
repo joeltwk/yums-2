@@ -1,6 +1,21 @@
 <h2>My Profile</h2>
 
 <h3><%= @user.name %></h3>
+<% if current_user.id != @user.id %>
+  <% if @current_user_friends_users.include?(@user.id) %>
+      <%= link_to 'Delete Friend',
+          user_friend_path(@current_friend),
+          data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}%>
+    <% else %>
+      <%= simple_form_for [@user, @friend] do |f| %>
+      <%= f.submit 'Add Friend'%>
+    <% end %>
+  <% end %>
+<% end %>
+
+<h3>Friends</h3>
+  <%= link_to @users.count, user_friends_path(current_user) %>
+<br>
 <% if @user.role === "owner" %>
   <%= link_to "My Restaurants", restaurants_path %>
 <% else %>

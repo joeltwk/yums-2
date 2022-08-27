@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :restaurants do
     resources :reviews, only: [:index, :new, :create]
   end
-  resources :users, only: [:show]
+  resources :users, only: [:show] do
+    resources :friends, only: %i[index new create show destroy]
+  end
   resources :reviews, only: [:show, :edit, :update]
 end
