@@ -56,3 +56,26 @@ restaurant2 = Restaurant.create!(
 )
 
 puts "Done"
+
+# Restaurant Seed Data
+puts "destroying restaurants..."
+
+Restaurant.destroy_all
+
+puts "creating restaurants..."
+
+restaurant1 = Restaurant.create!(
+  name: 'Brotzeit',
+  address: '1 HarbourFront Walk, #01-149 VivoCity, Singapore 098585',
+  cuisine: 'German',
+  description: 'Brotzeit is a German restaurants serving authentic and traditional German cuisine & beer in Singapore.'
+)
+
+restaurant2 = Restaurant.create!(
+  name: 'Ri Ri Hong Ma La Xiang Guo',
+  address: "32 Market Road, #01-042/052, People's Park Food Centre, Singapore 050032",
+  cuisine: 'Chinese',
+  description: "Everyone's favourite Sze Chuan local dish serving in Chinatown."
+)
+
+puts "Done"
