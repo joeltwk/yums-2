@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   end
   resources :users, only: [:show] do
     resources :friends, only: %i[index new create show destroy]
+    resources :followers, only: %i[index]
   end
   resources :reviews, only: [:show, :edit, :update]
 end
