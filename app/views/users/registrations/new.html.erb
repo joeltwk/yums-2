@@ -1,4 +1,9 @@
-<h2>Sign up</h2>
+<% role = params[:role] %>
+<% if role == "owner" %>
+  <h2>Sign up as a Restaurant Owner</h2>
+<% else %>
+  <h2>Sign up</h2>
+<% end %>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
