@@ -4,8 +4,11 @@
 
 import { application } from "./application"
 
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
+import AddProfileImageController from "./add_profile_image_controller"
+application.register("add-profile-image", AddProfileImageController)
 
 import DropdownController from "./dropdown_controller"
 application.register("dropdown", DropdownController)
+
+import HelloController from "./hello_controller"
+application.register("hello", HelloController)

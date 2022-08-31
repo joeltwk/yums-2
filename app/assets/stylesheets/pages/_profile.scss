@@ -1,0 +1,106 @@
+.no-profile {
+  background-color: rgb(255, 243, 184);
+  border-radius: 50%;
+  height: 75px;
+  width: 75px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.fa-user {
+  font-size: 2.5em;
+  color: darkcyan;
+}
+
+.profile-info {
+  margin-top: 20px;
+}
+
+.username {
+  font-size: 1.2em;
+  font-weight: bolder;
+}
+
+.about {
+  margin-top: 10px;
+  font-size: 1em;
+}
+
+.follow-container {
+  width: 250px;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.follow-info .follow-count {
+  display: flex;
+  justify-content: center;
+}
+
+.follow-count-text {
+  margin-top: 0px;
+  text-decoration: none;
+  color: black;
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.follow-title {
+  font-size: 0.8em;
+  color: rgb(62, 62, 62);
+  margin-bottom: 0px;
+}
+
+.profile-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.unfollow-btn {
+  text-decoration: none;
+  color: black;
+  padding: 15px 30px;
+  border-radius: 15px;
+  border: solid 1px rgb(255, 178, 54);
+  margin: 0 5px;
+}
+
+.follow-btn {
+  text-decoration: none;
+  color: black;
+  padding: 15px 40px;
+  background-color: rgb(255, 178, 54);
+  border-radius: 15px;
+  border: none;
+  margin: 0 5px;
+}
+
+.follow-btn-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.role-btn {
+  height: 45px;
+  display: flex;
+  align-items: center;
+}
+
+.follow-btns {
+  height: 45px;
+  display: flex;
+  align-items: center;
+}
+
+.add-photo-form {
+  margin-top: 10px;
+}
+
+.add-photo-form .form-control {
+  border-radius: 10px;
+  background-color: rgb(255, 243, 184);
+}

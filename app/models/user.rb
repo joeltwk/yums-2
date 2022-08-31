@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :friends, class_name: 'Friend', foreign_key: 'followee_id, follower_id'
+  has_one_attached :photo
 
   validates :name, presence: true
   validates :role, presence: true
