@@ -1,6 +1,14 @@
 <h1>List of Restaurants</h1>
-<ol>
-<% @restaurants.each do |restaurant| %>
-  <li> <%= restaurant.name %> | <%= link_to "Details", restaurant_path(restaurant) %></li>
-<% end %>
-</ol>
+
+<div data-controller="carousel" class="swiper mySwiper">
+  <div class="swiper-wrapper">
+    <% @restaurants.each do |restaurant| %>
+      <div class="swiper-slide">
+        <div class="card-body">
+          <%= restaurant.name %>
+          <%= link_to "Details", restaurant_path(restaurant) %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

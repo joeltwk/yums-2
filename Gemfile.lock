@@ -116,6 +116,7 @@ GEM
       sassc (~> 2.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    hammerjs-rails (2.0.8)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     io-console (0.5.11)
@@ -263,6 +264,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   font-awesome-sass (~> 6.1)
+  hammerjs-rails
   jbuilder
   jsbundling-rails
   pg (~> 1.1)
