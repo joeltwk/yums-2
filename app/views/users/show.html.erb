@@ -11,11 +11,11 @@
         <% end %>
       </div>
     <% else %>
-      <div class="profile-image">
+      <div class="profile-image" data-action="click->add-profile-image#show">
         <% if @user.photo.attached? %>
           <%= cl_image_tag @user.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, :class => 'profile-pic' %>
           <% else %>
-          <div class='no-profile' data-action="click->add-profile-image#show">
+          <div class='no-profile'>
           <i class="fa-solid fa-user"></i>
           </div>
         <% end %>
@@ -41,6 +41,7 @@
     <div class="add-photo-form d-none" data-add-profile-image-target='form'>
       <%= simple_form_for(@user) do |f| %>
         <%= f.input :photo, as: :file %>
+        <%= f.submit 'Add Image', :class => 'add-btn' %>
       <% end %>
     </div>
     <%# end of profile image form %>

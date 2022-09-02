@@ -8,6 +8,12 @@
   align-items: center;
 }
 
+.profile-pic {
+  border-radius: 50%;
+  height: 75px;
+  width: 75px;
+}
+
 .fa-user {
   font-size: 2.5em;
   color: darkcyan;
@@ -103,4 +109,35 @@
 .add-photo-form .form-control {
   border-radius: 10px;
   background-color: rgb(255, 243, 184);
+}
+
+
+// follow list css
+
+.follow-profile-container {
+  display: flex;
+  align-items: center;
+}
+
+.follow-profile-pic {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+
+.follow-name {
+  text-decoration: none;
+  font-size: 1.2em;
+  color: black;
+  margin-left: 20px;
+}
+
+.follow-no-profile {
+  background-color: rgb(255, 243, 184);
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

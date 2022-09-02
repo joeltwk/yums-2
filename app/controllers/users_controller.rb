@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show]
+  before_action :set_user, only: %i[show update]
 
   def show
     @friend = Friend.new
@@ -13,10 +13,20 @@ class UsersController < ApplicationController
     @current_friend = Friend.where(followee_id: @user.id)
   end
 
+  def update
+    if @user.update(user_params)
+      redirect_to user_path(@user)
+    end
+  end
+
   def destroy
   end
 
   private
+
+  def user_params
+    params.require(:user).permit(:photo)
+  end
 
   def set_user
     @user = User.find(params[:id])
