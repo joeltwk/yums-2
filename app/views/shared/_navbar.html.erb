@@ -21,8 +21,15 @@
             <%= link_to "All Restaurants", restaurants_path, class: "nav-link" %>
           </li>
           <li class="nav-item dropdown">
-            <div class="" data-action="click->dropdown#toggle">
-              <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar dropdown-toggle" %>
+              <%# <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar dropdown-toggle" %>
+            <div class="profile-image" data-action="click->dropdown#toggle">
+              <% if current_user.photo.attached? %>
+                <%= cl_image_tag current_user.photo.key, crop: :thumb, gravity: :face, :class => 'navbar-profile-pic' %>
+                <% else %>
+                <div class='navbar-no-profile'>
+                <i class="fa-solid fa-user navbar-fa-user"></i>
+                </div>
+              <% end %>
             </div>
             <div
               data-dropdown-target="menu"
