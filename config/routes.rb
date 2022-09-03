@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   resources :restaurants do
     resources :reviews, only: [:index, :new, :create]
   end
-  resources :users, only: [:show] do
+  resources :users, only: %i[show update] do
     resources :friends, only: %i[index new create show destroy]
     resources :followers, only: %i[index]
   end
