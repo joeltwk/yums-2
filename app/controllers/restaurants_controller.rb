@@ -15,10 +15,9 @@ class RestaurantsController < ApplicationController
   end
 
   def create
-    user = current_user
     @restaurant = Restaurant.new(restaurant_params)
-    @restaurant.user = user
-    if @restaurant.save!
+    @restaurant.user = current_user
+    if @restaurant.save
       redirect_to restaurant_path(@restaurant)
     else
       render :new, status: :unprocessable_entity
