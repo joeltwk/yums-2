@@ -1,0 +1,33 @@
+.card-category {
+  box-shadow: 0 0 15px rgba(42, 38, 38, 0.1);
+  border-radius: 5px;
+  padding: 12px 12px;
+}
+
+h6 {
+  font-weight: bolder;
+}
+
+p {
+  color: rgb(72, 65, 65);
+  // line-height: 0;
+}
+
+.image-show {
+  width: 100%;
+  border-radius: 2.5px;
+}
+
+.restaurant-infos {
+  display: flex;
+  justify-content: space-between;
+}
+
+.reviewer {
+  text-align: center;
+  display: flex;
+}
+
+#testing{
+  display: flex;
+}

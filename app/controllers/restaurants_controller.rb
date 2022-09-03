@@ -2,6 +2,7 @@ class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
 
   def show
+    @restaurant = Restaurant.find(params[:id])
     @reviews = Review.where(restaurant_id: @restaurant)
   end
 
@@ -14,8 +15,10 @@ class RestaurantsController < ApplicationController
   end
 
   def create
+    user = current_user
     @restaurant = Restaurant.new(restaurant_params)
-    if @restaurant.save
+    @restaurant.user = user
+    if @restaurant.save!
       redirect_to restaurant_path(@restaurant)
     else
       render :new, status: :unprocessable_entity
@@ -38,7 +41,7 @@ class RestaurantsController < ApplicationController
   private
 
   def restaurant_params
-    params.require(:restaurant).permit(:name, :address, :cuisine, :description, :photo)
+    params.require(:restaurant).permit(:name, :address, :cuisine, :description, :photos)
   end
 
   def set_restaurant

@@ -5,9 +5,12 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+require 'open-uri'
+
+puts "destroying restaurants..."
+Restaurant.destroy_all
 
 puts "destroying users..."
-
 User.destroy_all
 
 puts "creating user..."
@@ -26,13 +29,15 @@ user2 = User.create!(
   password: 'Password123'
 )
 
-puts "destroying restaurants..."
-
-Restaurant.destroy_all
-
 puts "creating restaurant..."
 
-restaurant = Restaurant.create!(
+file = URI.open("http://www.pastamania.com/wp-content/uploads/2017/01/Pizza.jpg")
+file2 = URI.open("https://anakjajan.com/2016/06/20/marutama-ra-men-new-menu/")
+file3 = URI.open("https://scontent.fsin15-2.fna.fbcdn.net/v/t1.6435-9/38171745_2149053175371802_6096682849488863232_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=e3f864&_nc_eui2=AeHviH4EDrvOZy2gtwSRFeMc00cp1g4WJwvTRynWDhYnCy_IU_47bj6H8f1Cq212T7Q&_nc_ohc=fUpq8k6-QicAX8TSAas&_nc_ht=scontent.fsin15-2.fna&oh=00_AT_YW-oDtCLgFHSYeuLpQvb-DqYX1p6wmXOaMC3bEvfJ1Q&oe=6330F4F9")
+file4 = URI.open("https://ucarecdn.com/c7ee53c0-9a94-4518-984a-20d544af3ca8/")
+file5 = URI.open("https://farm2.staticflickr.com/1504/24672192023_81a7bbe514_o.jpg")
+
+restaurant = Restaurant.new(
   name: 'Pasta Mania',
   address: '7 Buroh Lane, #06-02
   Commonwealth Capital Building
@@ -42,6 +47,8 @@ restaurant = Restaurant.create!(
   description: 'From hearty pastas and pizzas to delectable desserts,
   theres definitely something to satisfy your tastebuds. '
 )
+restaurant.photo.attach(io: file, filename: "pastamania.png", content_type: "image/png")
+restaurant.save!
 
 restaurant2 = Restaurant.create!(
   name: 'Marutama Ramen',
@@ -52,6 +59,8 @@ restaurant2 = Restaurant.create!(
   the rich chicken broth, achieving a perfect balance between the broth and
   noodles. Specially selected aromatic flour directly from Japan is used.'
 )
+restaurant2.photo.attach(io: file2, filename: "marutamaramen.png", content_type: "image/png")
+restaurant2.save!
 
 restaurant3 = Restaurant.create!(
   name: "Waa Cow!",
@@ -60,6 +69,8 @@ restaurant3 = Restaurant.create!(
   user: user2,
   description: "Waa Cow! serves one of the best and most affordable flame-torched wagyu beef bowls in Singapore"
 )
+restaurant3.photo.attach(io: file3, filename: "waacow.png", content_type: "image/png")
+restaurant3.save!
 
 restaurant4 = Restaurant.create!(
   name: "Coucou",
@@ -68,20 +79,17 @@ restaurant4 = Restaurant.create!(
   user: user2,
   description: "Bringing you the best of Swiss Cuisine"
 )
+restaurant4.photo.attach(io: file4, filename: "coucou.png", content_type: "image/png")
+restaurant4.save!
 
 restaurant5 = Restaurant.create!(
-  name: "Obba BBQ",
-  address: "63 Tg Pagar Rd, Singapore 088484",
-  cuisine: "Korean",
-  user: user2,
-  description: "Korean grill dishes served in a popular, warm restaurant that has booths & tabletop BBQs."
-)
-
-restaurant6 = Restaurant.create!(
   name: "W39 Bistro & Bakery",
   address: "39 Jalan Mas Puteh, Singapore 128637",
   cuisine: "Local",
   user: user2,
   description: "Sweet & savoury delights from finger bites to salads & main meals. The perfect compliment to any occasion!"
 )
+restaurant5.photo.attach(io: file5, filename: "w39bistro.png", content_type: "image/png")
+restaurant5.save!
+
 puts "Done"

@@ -2,8 +2,10 @@
 <ol>
 <% @restaurants.each do |restaurant| %>
   <li> <b><%= restaurant.name %></b> | <%= restaurant.cuisine %><p><%= restaurant.description %><br><%= link_to "Details", restaurant_path(restaurant) %></p></li>
-  <%# <%= Cl_image_tag (restaurant.photo.key) %>
-  <%= cl_image_tag("https://res.cloudinary.com/chuawanting/image/upload/v1661528740/kynphrhs6lecyogd5vzj.jpg",
-      width: 400, height: 300, crop: :fill) %>
+  <% if restaurant.photo.attached? %>
+    <%= cl_image_tag restaurant.photo.key, height: 300, width: 700, crop: :scale %>
+  <% else %>
+    <%= "" %>
+  <% end %>
 <% end %>
 </ol>
