@@ -1,16 +1,17 @@
-<h1>List of Restaurants</h1>
-
-<div data-controller="carousel" class="swiper mySwiper">
-  <div class="swiper-wrapper">
+<div class="card-category">
+  <h1>Restaurants</h1>
+  <%# <ol> %>
+  <div class="content">
     <% @restaurants.each do |restaurant| %>
-      <div class="swiper-slide">
-        <div class="card">
-          <%= restaurant.name %>
-          <%= link_to "Details", restaurant_path(restaurant) %>
-          <p data-carousel-target="bookmark"><%= restaurant.id %></p>
-        </div>
+      <div class="cards">
+        <% if restaurant.photo.attached? %>
+          <%= cl_image_tag restaurant.photo.key, :class => "image-show" %>
+          <li><b><%= link_to restaurant.name, restaurant_path(restaurant)  %></b> | <%= restaurant.cuisine %><p><%= restaurant.description %><br><%= link_to "Find out more!", restaurant_path(restaurant) %></p></li>
+        <% else %>
+          <%= "" %>
+        <% end %>
       </div>
     <% end %>
-    </div>
   </div>
+  <%# </ol> %>
 </div>

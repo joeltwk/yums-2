@@ -1,0 +1,33 @@
+.card-category {
+  box-shadow: 0 0 15px rgba(42, 38, 38, 0.1);
+  border-radius: 5px;
+  padding: 12px 12px;
+}
+
+.image-show {
+  width: 100%;
+  border-radius: 2.5px;
+}
+
+.cards {
+  flex-grow: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px;
+  padding: 16px;
+}
+
+p{
+  font-size: 10px;
+}
+
+a {
+  color: rgb(72, 65, 65);
+  text-decoration: none;
+  border:rgba(42, 38, 38, 0.1);
+}
+
+a:hover {
+  color: rgb(145, 128, 128);
+  border:rgba(42, 38, 38, 0.1);
+}

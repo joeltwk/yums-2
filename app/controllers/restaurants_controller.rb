@@ -2,6 +2,7 @@ class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
 
   def show
+    @restaurant = Restaurant.find(params[:id])
     @reviews = Review.where(restaurant_id: @restaurant)
   end
 
@@ -39,7 +40,7 @@ class RestaurantsController < ApplicationController
   private
 
   def restaurant_params
-    params.require(:restaurant).permit(:name, :address, :cuisine, :description)
+    params.require(:restaurant).permit(:name, :address, :cuisine, :description, :photo)
   end
 
   def set_restaurant
