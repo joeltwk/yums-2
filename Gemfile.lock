@@ -122,13 +122,9 @@ GEM
       sassc (~> 2.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
-<<<<<<< HEAD
-    hammerjs-rails (2.0.8)
-=======
     http-accept (1.7.0)
     http-cookie (1.0.5)
       domain_name (~> 0.5)
->>>>>>> master
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     io-console (0.5.11)
