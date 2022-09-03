@@ -37,7 +37,7 @@ file3 = URI.open("https://scontent.fsin15-2.fna.fbcdn.net/v/t1.6435-9/38171745_2
 file4 = URI.open("https://ucarecdn.com/c7ee53c0-9a94-4518-984a-20d544af3ca8/")
 file5 = URI.open("https://farm2.staticflickr.com/1504/24672192023_81a7bbe514_o.jpg")
 
-restaurant = Restaurant.new(
+restaurant = Restaurant.create!(
   name: 'Pasta Mania',
   address: '7 Buroh Lane, #06-02
   Commonwealth Capital Building
@@ -61,6 +61,8 @@ restaurant2 = Restaurant.create!(
   noodles. Specially selected aromatic flour directly from Japan is used.',
   active: true
 )
+restaurant.photo.attach(io: file2, filename: "marutamaramen.png", content_type: "image/png")
+restaurant.save!
 
 restaurant3 = Restaurant.create!(
   name: 'Brotzeit',
@@ -70,6 +72,8 @@ restaurant3 = Restaurant.create!(
   description: 'Brotzeit is a German restaurants serving authentic and traditional German cuisine & beer in Singapore.',
   active: true
 )
+restaurant.photo.attach(io: file3, filename: "brotzeit.png", content_type: "image/png")
+restaurant.save!
 
 restaurant4 = Restaurant.create!(
   name: 'Ri Ri Hong Ma La Xiang Guo',
@@ -79,37 +83,37 @@ restaurant4 = Restaurant.create!(
   description: "Everyone's favourite Sze Chuan local dish serving in Chinatown.",
   active: true
 )
-restaurant2.photo.attach(io: file2, filename: "marutamaramen.png", content_type: "image/png")
-restaurant2.save!
-
-restaurant3 = Restaurant.create!(
-  name: "Waa Cow!",
-  address: "Marina One. 5 Straits View, #01-09. Marina One The Heart West Tower, Singapore 018935",
-  cuisine: 'Japanese',
-  user: user2,
-  description: "Waa Cow! serves one of the best and most affordable flame-torched wagyu beef bowls in Singapore"
-)
-restaurant3.photo.attach(io: file3, filename: "waacow.png", content_type: "image/png")
-restaurant3.save!
-
-restaurant4 = Restaurant.create!(
-  name: "Coucou",
-  address: "9 Craig Road, #01-01, Singapore 089669",
-  cuisine: "Swiss",
-  user: user2,
-  description: "Bringing you the best of Swiss Cuisine"
-)
-restaurant4.photo.attach(io: file4, filename: "coucou.png", content_type: "image/png")
+restaurant4.photo.attach(io: file4, filename: "ririmala.png", content_type: "image/png")
 restaurant4.save!
 
-restaurant5 = Restaurant.create!(
-  name: "W39 Bistro & Bakery",
-  address: "39 Jalan Mas Puteh, Singapore 128637",
-  cuisine: "Local",
-  user: user2,
-  description: "Sweet & savoury delights from finger bites to salads & main meals. The perfect compliment to any occasion!"
-)
-restaurant5.photo.attach(io: file5, filename: "w39bistro.png", content_type: "image/png")
-restaurant5.save!
+# restaurant3 = Restaurant.create!(
+#   name: "Waa Cow!",
+#   address: "Marina One. 5 Straits View, #01-09. Marina One The Heart West Tower, Singapore 018935",
+#   cuisine: 'Japanese',
+#   user: user2,
+#   description: "Waa Cow! serves one of the best and most affordable flame-torched wagyu beef bowls in Singapore"
+# )
+# restaurant3.photo.attach(io: file3, filename: "waacow.png", content_type: "image/png")
+# restaurant3.save!
+
+# restaurant4 = Restaurant.create!(
+#   name: "Coucou",
+#   address: "9 Craig Road, #01-01, Singapore 089669",
+#   cuisine: "Swiss",
+#   user: user2,
+#   description: "Bringing you the best of Swiss Cuisine"
+# )
+# restaurant4.photo.attach(io: file4, filename: "coucou.png", content_type: "image/png")
+# restaurant4.save!
+
+# restaurant5 = Restaurant.create!(
+#   name: "W39 Bistro & Bakery",
+#   address: "39 Jalan Mas Puteh, Singapore 128637",
+#   cuisine: "Local",
+#   user: user2,
+#   description: "Sweet & savoury delights from finger bites to salads & main meals. The perfect compliment to any occasion!"
+# )
+# restaurant5.photo.attach(io: file5, filename: "w39bistro.png", content_type: "image/png")
+# restaurant5.save!
 
 puts "Done"
