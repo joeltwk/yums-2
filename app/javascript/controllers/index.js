@@ -4,8 +4,13 @@
 
 import { application } from "./application"
 
+<<<<<<< HEAD
+import CarouselController from "./carousel_controller"
+application.register("carousel", CarouselController)
+=======
 import AddProfileImageController from "./add_profile_image_controller"
 application.register("add-profile-image", AddProfileImageController)
+>>>>>>> master
 
 import DropdownController from "./dropdown_controller"
 application.register("dropdown", DropdownController)
