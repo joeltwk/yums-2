@@ -24,9 +24,9 @@ user = User.create!(
 
 user2 = User.create!(
   name: 'Test Owner',
-  role: 'owner',
   email: 'owner@email.com',
-  password: 'Password123'
+  password: 'Password123',
+  role: 'owner'
 )
 
 puts "creating restaurant..."
@@ -45,7 +45,8 @@ restaurant = Restaurant.new(
   cuisine: 'Italian',
   user: user2,
   description: 'From hearty pastas and pizzas to delectable desserts,
-  theres definitely something to satisfy your tastebuds. '
+  theres definitely something to satisfy your tastebuds. ',
+  active: true
 )
 restaurant.photo.attach(io: file, filename: "pastamania.png", content_type: "image/png")
 restaurant.save!
@@ -58,6 +59,7 @@ restaurant2 = Restaurant.create!(
   description: 'Skilled noodle craftsmen pursue noodles that go well with
   the rich chicken broth, achieving a perfect balance between the broth and
   noodles. Specially selected aromatic flour directly from Japan is used.'
+  active: true
 )
 restaurant2.photo.attach(io: file2, filename: "marutamaramen.png", content_type: "image/png")
 restaurant2.save!

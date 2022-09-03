@@ -1,0 +1,15 @@
+<h3>Following</h3>
+<% @following.each do |followed| %>
+  <div class="follow-profile-container">
+    <div class="follow-profile-pic">
+      <% if followed.photo.attached? %>
+        <%= cl_image_tag followed.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, :class => 'follow-profile-pic' %>
+        <% else %>
+        <div class='follow-no-profile'>
+        <i class="fa-solid fa-user"></i>
+        </div>
+      <% end %>
+    </div>
+      <%= link_to followed.name, user_path(followed), :class => 'follow-name' %>
+  </div>
+<% end %>
