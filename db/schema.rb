@@ -10,8 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_31_113258) do
-
+ActiveRecord::Schema[7.0].define(version: 2022_08_27_080351) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,8 +42,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_31_113258) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-<<<<<<< HEAD
-=======
   create_table "friends", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -52,7 +49,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_31_113258) do
     t.bigint "follower_id", null: false
   end
 
->>>>>>> master
   create_table "restaurants", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -93,11 +89,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_31_113258) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-<<<<<<< HEAD
-=======
   add_foreign_key "friends", "users", column: "followee_id"
   add_foreign_key "friends", "users", column: "follower_id"
->>>>>>> master
   add_foreign_key "restaurants", "users"
   add_foreign_key "reviews", "restaurants"
   add_foreign_key "reviews", "users"

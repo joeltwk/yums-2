@@ -1,11 +1,17 @@
-<h1>List of suggested restaurants</h1>
-<ol>
-<% @restaurants.each do |restaurant| %>
-  <li> <b><%= restaurant.name %></b> | <%= restaurant.cuisine %><p><%= restaurant.description %><br><%= link_to "Details", restaurant_path(restaurant) %></p></li>
-  <% if restaurant.photo.attached? %>
-    <%= cl_image_tag restaurant.photo.key, height: 300, width: 700, crop: :scale %>
-  <% else %>
-    <%= "" %>
-  <% end %>
-<% end %>
-</ol>
+<div class="card-category">
+  <h1>Restaurants</h1>
+  <%# <ol> %>
+  <div class="content">
+    <% @restaurants.each do |restaurant| %>
+      <div class="cards">
+        <% if restaurant.photo.attached? %>
+          <%= cl_image_tag restaurant.photo.key, :class => "image-show" %>
+          <li><b><%= link_to restaurant.name, restaurant_path(restaurant)  %></b> | <%= restaurant.cuisine %><p><%= restaurant.description %><br><%= link_to "Find out more!", restaurant_path(restaurant) %></p></li>
+        <% else %>
+          <%= "" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <%# </ol> %>
+</div>
