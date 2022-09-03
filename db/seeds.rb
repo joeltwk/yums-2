@@ -51,31 +51,26 @@ restaurant2 = Restaurant.create!(
   user: user2,
   description: 'Skilled noodle craftsmen pursue noodles that go well with
   the rich chicken broth, achieving a perfect balance between the broth and
-  noodles. Specially selected aromatic flour directly from Japan is used.'
+  noodles. Specially selected aromatic flour directly from Japan is used.',
   active: true
 )
-
-puts "Done"
-
-# Restaurant Seed Data
-puts "destroying restaurants..."
-
-Restaurant.destroy_all
-
-puts "creating restaurants..."
 
 restaurant1 = Restaurant.create!(
   name: 'Brotzeit',
   address: '1 HarbourFront Walk, #01-149 VivoCity, Singapore 098585',
   cuisine: 'German',
-  description: 'Brotzeit is a German restaurants serving authentic and traditional German cuisine & beer in Singapore.'
+  user: user2,
+  description: 'Brotzeit is a German restaurants serving authentic and traditional German cuisine & beer in Singapore.',
+  active: true
 )
 
 restaurant2 = Restaurant.create!(
   name: 'Ri Ri Hong Ma La Xiang Guo',
   address: "32 Market Road, #01-042/052, People's Park Food Centre, Singapore 050032",
   cuisine: 'Chinese',
-  description: "Everyone's favourite Sze Chuan local dish serving in Chinatown."
+  user: user2,
+  description: "Everyone's favourite Sze Chuan local dish serving in Chinatown.",
+  active: true
 )
 
 puts "Done"

@@ -4,11 +4,13 @@
   <div class="swiper-wrapper">
     <% @restaurants.each do |restaurant| %>
       <div class="swiper-slide">
-        <div class="card-body">
+        <div class="card">
           <%= restaurant.name %>
           <%= link_to "Details", restaurant_path(restaurant) %>
+          <p data-carousel-target="bookmark"><%= restaurant.id %></p>
         </div>
       </div>
     <% end %>
+    </div>
   </div>
 </div>
