@@ -285,6 +285,7 @@ DEPENDENCIES
   devise
   dotenv-rails
   font-awesome-sass (~> 6.1)
+  hammerjs-rails
   jbuilder
   jsbundling-rails
   pg (~> 1.1)
