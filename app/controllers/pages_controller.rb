@@ -1,7 +1,9 @@
 class PagesController < ApplicationController
   before_action :user_login?, only: [:home]
   def home
-    @restaurants = Restaurant.all
+    @restaurants = Collection.all
+    @favourite = Favourite.new
+    @restaurant = Restaurant.new
   end
 
   private

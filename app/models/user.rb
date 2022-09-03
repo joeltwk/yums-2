@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_many :friends, class_name: 'Friend', foreign_key: 'followee_id, follower_id'
   has_one_attached :photo
-  has_one :collection
+  has_many :restaurant
 
   validates :name, presence: true
   validates :role, presence: true

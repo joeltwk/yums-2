@@ -16,7 +16,19 @@ class RestaurantsController < ApplicationController
   def create
     @restaurant = Restaurant.new(restaurant_params)
     @restaurant.user = current_user
+    @user = User.all
     if @restaurant.save
+      @user.each do |user|
+        if user.role === "regular"
+          @collection = Collection.new
+          @collection.restaurant = @restaurant
+          @collection.user = user
+          if @collection.save
+          else
+            render :new, status: :unprocessable_entity
+          end
+        end
+      end
       redirect_to restaurant_path(@restaurant)
     else
       render :new, status: :unprocessable_entity

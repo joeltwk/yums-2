@@ -64,7 +64,7 @@ restaurant1 = Restaurant.create!(
   active: true
 )
 
-restaurant2 = Restaurant.create!(
+restaurant3 = Restaurant.create!(
   name: 'Ri Ri Hong Ma La Xiang Guo',
   address: "32 Market Road, #01-042/052, People's Park Food Centre, Singapore 050032",
   cuisine: 'Chinese',
@@ -72,5 +72,15 @@ restaurant2 = Restaurant.create!(
   description: "Everyone's favourite Sze Chuan local dish serving in Chinatown.",
   active: true
 )
+
+puts "destroying collection..."
+
+Collection.destroy_all
+
+puts "creating collection..."
+
+collection1 = Collection.create!(user: user, restaurant: restaurant)
+collection2 = Collection.create!(user: user, restaurant: restaurant2)
+collection3 = Collection.create!(user: user, restaurant: restaurant3)
 
 puts "Done"
