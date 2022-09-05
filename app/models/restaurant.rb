@@ -1,5 +1,6 @@
 class Restaurant < ApplicationRecord
-  has_many :reviews
   belongs_to :user
-  has_many :collection
+  has_many :reviews
+  has_many :collections
+  has_many :favourites
 end

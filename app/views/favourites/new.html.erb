@@ -1,5 +1,0 @@
-<%= @restaurant.name %>
-<%= simple_form_for [@restaurant, @favourite] do |f| %>
-  <%= f.input :user_id, input_html: { value: current_user.id } %>
-  <%= f.submit %>
-<% end %>

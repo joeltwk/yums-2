@@ -3,6 +3,11 @@ class RestaurantsController < ApplicationController
 
   def show
     @reviews = Review.where(restaurant_id: @restaurant)
+    if @restaurant.favourites.find_by(user_id: current_user.id).nil?
+      @favourite = Favourite.new
+    else
+      @favourite = Favourite.find_by(user_id: current_user.id, restaurant_id: @restaurant.id)
+    end
   end
 
   def index

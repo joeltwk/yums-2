@@ -2,6 +2,15 @@
 <h5><%= @restaurant.address %></h5>
 <p>Cuisine: <%= @restaurant.cuisine %></p>
 <p><%= @restaurant.description %></p>
+<% if @restaurant.favourites.find_by(user_id: current_user.id) == nil %>
+  <p><%= render "favourites/form", favourite: @favourite %></p>
+<% else %>
+  <p>
+    <%= link_to icon('fa-solid', 'heart'), favourite_path(@favourite),
+    data: {turbo_method: :delete} %>
+  </p>
+<% end %>
+
 <% if current_user.role === 'owner' %>
   <%= link_to "Edit Restaurant", edit_restaurant_path(@restaurant) %>
   <%= link_to "Delete",
@@ -11,7 +20,7 @@
 <% else %>
   <%= link_to "Add a Review", new_restaurant_review_path(@restaurant) %>
 <% end %>
-
+<br>
 <h5>Reviews</h5>
 <% @reviews.each do |review| %>
   <p>Rating: <%= review.rating %></p>
