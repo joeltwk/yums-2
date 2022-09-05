@@ -1,5 +1,9 @@
 <div class="card-category">
-  <%= cl_image_tag @restaurant.photo.key, :class => "image-show" %>
+  <% if @restaurant.photo.attached? %>
+    <%= cl_image_tag @restaurant.photo.key, :class => "image-show" %>
+  <% else %>
+    <img src="https://res.cloudinary.com/heefang/image/upload/v1659753817/cld-sample-4.jpg" class="image-show">
+  <% end %>
   <div class="restaurant-infos">
     <div>
       <div class="restaurant-details">
@@ -17,7 +21,7 @@
         <% else %>
           <p>
             <%= link_to icon('fa-solid', 'heart'), favourite_path(@favourite),
-            data: {turbo_method: :delete} %>
+            data: {turbo_method: :delete} %> Added to Favourites
           </p>
         <% end %>
       </div>
