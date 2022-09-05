@@ -24,10 +24,12 @@
         <%= link_to followed.name, user_path(followed), :class => 'follow-name' %>
     </div>
     <div>
-      <% current_friend = Friend.find_by(followee_id: followed.id) %>
-      <%= link_to 'Unfollow',
-                  friend_path(current_friend),
-                  data: {turbo_method: :delete}, :class => 'follow-unfollow-btn' %>
+      <% current_friend = Friend.find_by(follower_id: current_user.id, followee_id: followed.id) %>
+      <% if @user.id == current_user.id %>
+        <%= link_to 'Unfollow',
+                    friend_path(current_friend),
+                    data: {turbo_method: :delete}, :class => 'follow-unfollow-btn' %>
+      <% end %>
     </div>
   </div>
 <% end %>

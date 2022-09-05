@@ -20,7 +20,7 @@ class FriendsController < ApplicationController
     @friends.follower = current_user
     @friends.followee = User.find(params[:user_id])
     if @friends.save
-      redirect_to user_path(User.find(params[:id]))
+      redirect_to request.referrer
     end
   end
 
@@ -30,7 +30,8 @@ class FriendsController < ApplicationController
   def destroy
     @followee = @friends.followee_id
     @friends.destroy
-    redirect_to user_path(@followee), status: 303
+    # redirect_to user_path(@followee), status: 303
+    redirect_to request.referrer
   end
 
   private
