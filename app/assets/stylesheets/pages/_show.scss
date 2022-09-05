@@ -1,0 +1,76 @@
+.card-category {
+  box-shadow: 0 0 15px rgba(42, 38, 38, 0.1);
+  border-radius: 5px;
+  padding: 12px 12px;
+}
+
+.image-show {
+  width: 100%;
+  border-radius: 2.5px;
+}
+
+h1 {
+  border-bottom: 0.2px solid rgb(72, 65, 65);
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+h3 {
+  text-align: center;
+  letter-spacing: 0.5px;
+  border-bottom: 0.2px solid rgb(72, 65, 65);
+}
+h6 {
+  font-weight: bolder;
+  line-height: 0;
+  padding: 5px 0 0px 0;
+}
+
+p {
+  color: rgb(72, 65, 65);
+}
+
+#restaurant-title {
+  border-bottom: 0.2px solid rgb(72, 65, 65);
+}
+
+.review {
+  border-bottom: 0.2px solid rgb(72, 65, 65);
+}
+
+.review-container {
+  width: 100%;
+}
+.reviewer {
+  display: flex;
+}
+
+.review-avatar {
+  width: 60px;
+  text-align: center;
+  font-size: 12px;
+  // border: 0.2px solid rgb(72, 65, 65);
+  margin-right: 5px;
+}
+
+.description {
+  width: 300px;
+  text-align: left;
+  font-size: small;
+}
+
+.restaurant-edit {
+  margin-top: 3px;
+  text-align: center;
+  padding: center;
+  justify-content: center;
+}
+
+a {
+  color: rgb(72, 65, 65);
+  text-decoration: none;
+}
+
+a:hover {
+  color: rgb(145, 128, 128);
+}
