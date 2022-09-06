@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_31_113258) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_03_031610) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,6 +42,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_31_113258) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "collections", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "restaurant_id", null: false
+    t.index ["restaurant_id"], name: "index_collections_on_restaurant_id"
+    t.index ["user_id"], name: "index_collections_on_user_id"
+  end
+
+  create_table "favourites", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "restaurant_id", null: false
+    t.index ["restaurant_id"], name: "index_favourites_on_restaurant_id"
+    t.index ["user_id"], name: "index_favourites_on_user_id"
+  end
+
   create_table "friends", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,10 +71,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_31_113258) do
     t.string "name"
     t.string "address"
     t.string "cuisine"
-    t.string "description"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.boolean "active"
     t.index ["user_id"], name: "index_restaurants_on_user_id"
   end
 
@@ -81,7 +100,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_31_113258) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.string "role"
-    t.boolean "active"
     t.text "description"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -89,6 +107,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_31_113258) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "collections", "restaurants"
+  add_foreign_key "collections", "users"
+  add_foreign_key "favourites", "restaurants"
+  add_foreign_key "favourites", "users"
   add_foreign_key "friends", "users", column: "followee_id"
   add_foreign_key "friends", "users", column: "follower_id"
   add_foreign_key "restaurants", "users"

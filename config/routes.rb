@@ -8,11 +8,14 @@ Rails.application.routes.draw do
   # root "articles#index"
   resources :restaurants do
     resources :reviews, only: [:index, :new, :create]
+    resources :favourites, only: [:new, :create]
   end
   resources :users, only: %i[show update] do
     resources :friends, only: %i[index new create show]
     resources :followers, only: %i[index]
+    resources :favourites, only: [:show, :index]
   end
   resources :friends, only: [:destroy]
   resources :reviews, only: %i[show edit update]
+  resources :favourites, only: [:destroy]
 end

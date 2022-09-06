@@ -12,7 +12,10 @@ class User < ApplicationRecord
   has_many :followees, through: :followee_relationships, source: :followee
 
   has_one_attached :photo
+  has_one :collection
 
   validates :name, presence: true
   validates :role, presence: true
+  has_many :restaurants
+  has_many :reviews
 end
