@@ -1,11 +1,17 @@
 class FriendsController < ApplicationController
   before_action :set_user, only: %i[index]
-  before_action :find_user, only: %i[destroy]
+  before_action :set_friends, only: [:destroy]
+
   def index
-    @following_table = Friend.where(follower_id: @user.id)
-    @following = []
-    @following_table.each do |f|
-      @following << User.find(f.followee_id)
+    # @following_table = Friend.where(follower_id: @user.id)
+    # @following = []
+    # @following_table.each do |f|
+    #   @following << User.find(f.followee_id)
+    # end
+    if params[:query].present?
+      @following = @user.followees.where("name ILIKE ?", "%#{params[:query]}%")
+    else
+      @following = @user.followees
     end
   end
 
@@ -14,7 +20,7 @@ class FriendsController < ApplicationController
     @friends.follower = current_user
     @friends.followee = User.find(params[:user_id])
     if @friends.save
-      redirect_to user_path(User.find(params[:id]))
+      redirect_to request.referrer
     end
   end
 
@@ -22,9 +28,10 @@ class FriendsController < ApplicationController
   end
 
   def destroy
-    @current_friend = Friend.find_by(followee_id: @user2.id)
-    @current_friend.destroy
-    redirect_to user_path(@user2)
+    @followee = @friends.followee_id
+    @friends.destroy
+    # redirect_to user_path(@followee), status: 303
+    redirect_to request.referrer
   end
 
   private
@@ -33,7 +40,7 @@ class FriendsController < ApplicationController
     @user = User.find(params[:user_id])
   end
 
-  def find_user
-    @user2 = User.find(params[:id])
+  def set_friends
+    @friends = Friend.find(params[:id])
   end
 end
