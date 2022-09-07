@@ -4,10 +4,6 @@
 
 import { application } from "./application"
 
-
-import CarouselController from "./carousel_controller"
-application.register("carousel", CarouselController)
-
 import AddProfileImageController from "./add_profile_image_controller"
 application.register("add-profile-image", AddProfileImageController)
 

@@ -1,1 +1,10 @@
 // Specific CSS for your home-page
+.choice {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.card-body {
+  margin-top: 10px;
+}

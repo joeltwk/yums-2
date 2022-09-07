@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   resources :friends, only: [:destroy]
   resources :reviews, only: %i[show edit update]
   resources :favourites, only: [:destroy]
+  resources :collections, only: [:destroy]
 end

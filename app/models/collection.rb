@@ -1,4 +1,4 @@
 class Collection < ApplicationRecord
   belongs_to :user
-  has_many :restaurant
+  belongs_to :restaurant
 end
