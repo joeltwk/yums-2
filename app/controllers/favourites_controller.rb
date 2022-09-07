@@ -1,5 +1,6 @@
 class FavouritesController < ApplicationController
   before_action :set_restaurant, only: %i[new create]
+  before_action :set_favourite, only: [:destroy]
 
   def new
     @favourite = Favourite.new
@@ -19,9 +20,23 @@ class FavouritesController < ApplicationController
     end
   end
 
+  def index
+    @favourites = Favourite.where(user_id: current_user.id)
+  end
+
+  def destroy
+    @restaurant_id = @favourite.restaurant_id
+    @favourite.destroy
+    redirect_to restaurant_path(@restaurant_id), status: 303
+  end
+
   private
 
   def set_restaurant
     @restaurant = Restaurant.find(params[:restaurant_id])
+  end
+
+  def set_favourite
+    @favourite = Favourite.find(params[:id])
   end
 end

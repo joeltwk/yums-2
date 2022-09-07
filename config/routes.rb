@@ -17,4 +17,5 @@ Rails.application.routes.draw do
   end
   resources :reviews, only: [:show, :edit, :update]
   resources :collections, only: [:destroy]
+  resources :favourites, only: [:destroy]
 end
