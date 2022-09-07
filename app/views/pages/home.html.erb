@@ -20,6 +20,7 @@
             <%= simple_form_for [r.restaurant, @favourite] do |f| %>
               <%= f.input :restaurant_id, input_html: { value: r.restaurant }, as: :hidden  %>
               <%= f.input :user_id, input_html: { value: current_user.id }, as: :hidden  %>
+              <%= f.input :location, input_html: { value: "home" }, as: :hidden  %>
                 <%= button_tag(type: 'submit', class:"fav-button") do %>
                   <i class="fa-regular fa-heart"></i>
                 <% end %>
@@ -32,6 +33,14 @@
         </div>
       </div>
       <% break %>
+    <% else %>
+        <% if current_user.role === "owner" %>
+        <% else %>
+          <div class="card">
+            <p>Sorry, you have ran out of restaurants to view.</p>
+            <p>Click <%= link_to "here", user_favourites_path(current_user) %> to view your favourites!</p>
+          </div>
+        <% end %>
     <% end %>
   <% end %>
 <% end %>
