@@ -1,60 +1,56 @@
-<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-  <div class="container-fluid">
-    <%= link_to root_path, class: "navbar-brand" do %>
-      <%= image_tag "https://res.cloudinary.com/heefang/image/upload/v1661357606/yum_icon_white_xa7lyn.png" %>
-    <% end %>
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent" data-controller="dropdown">
-      <ul class="navbar-nav me-auto">
-        <% if user_signed_in? %>
-          <li class="nav-item active">
-            <%= link_to "Home", "/", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "My Favourites", "#", class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= link_to "All Restaurants", "/restaurants", class: "nav-link" %>
-          </li>
-          <% if current_user.role == "owner" %>
-            <li class="nav-item">
-              <%= link_to "Create a Restaurant", new_restaurant_path, class: "nav-link" %>
-            </li>
-          <% end %>
-          <li class="nav-item dropdown">
-              <%# <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar dropdown-toggle" %>
-            <div class="profile-image" data-action="click->dropdown#toggle">
-              <% if current_user.photo.attached? %>
-                <%= cl_image_tag current_user.photo.key, crop: :thumb, gravity: :face, :class => 'navbar-profile-pic' %>
-                <% else %>
-                <div class='navbar-no-profile'>
-                <i class="fa-solid fa-user navbar-fa-user"></i>
-                </div>
-              <% end %>
-            </div>
-            <div
-              data-dropdown-target="menu"
-              class="d-none">
-              <%= link_to "My Profile", user_path(current_user) %>
-              <%= button_to("Log Out", destroy_user_session_path, method: :delete) %>
-            </div>
-            <%# <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
-            <%# <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <%= link_to "Action", "#", class: "dropdown-item" %>
-              <%# <%= link_to "Another action", "#", class: "dropdown-item" %>
-              <%# <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
-            <%# </div> %>
-          </li>
-        <% else %>
-          <li class="nav-item">
-            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
-          </li>
+<div class="navbar fixed-bottom">
+  <div class="container-fluid d-flex justify-content-around">
+      <%# All Restaurants Link %>
+      <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+        <%= link_to restaurants_path do %>
+          <div class="nav-item-icon flex-grow-1">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+          <div class="nav-item-text mb-1">
+            All
+          </div>
         <% end %>
-      </ul>
-    </div>
+      </div>
+      <%# Search Link %>
+      <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+        <%= link_to restaurants_path do %>
+          <div class="nav-item-icon flex-grow-1">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <div class="nav-item-text mb-1">
+            Search
+          </div>
+        <% end %>
+      </div>
+      <%# Home Link %>
+      <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+        <%= link_to root_path, class: "home-btn" do %>
+          <div class="nav-item-icon flex-grow-1">
+            <img src="https://res.cloudinary.com/heefang/image/upload/v1661357606/yum_icon_white_xa7lyn.png">
+          </div>
+        <% end %>
+      </div>
+      <%# Favourites Link %>
+      <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+        <%= link_to user_favourites_path(current_user) do %>
+          <div class="nav-item-icon flex-grow-1">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+          <div class="nav-item-text mb-1">
+            Likes
+          </div>
+        <% end %>
+      </div>
+      <%# Profile Link %>
+      <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+        <%= link_to user_path(current_user) do %>
+          <div class="nav-item-icon flex-grow-1">
+            <i class="fa-solid fa-user" id="nav-user"></i>
+          </div>
+          <div class="nav-item-text mb-1">
+            Profile
+          </div>
+        <% end %>
+      </div>
   </div>
 </div>
