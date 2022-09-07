@@ -11,11 +11,12 @@ Rails.application.routes.draw do
     resources :favourites, only: [:new, :create]
   end
   resources :users, only: %i[show update] do
-    resources :friends, only: %i[index new create show destroy]
+    resources :friends, only: %i[index new create show]
     resources :followers, only: %i[index]
     resources :favourites, only: [:show, :index]
   end
-  resources :reviews, only: [:show, :edit, :update]
-  resources :collections, only: [:destroy]
+  resources :friends, only: [:destroy]
+  resources :reviews, only: %i[show edit update]
   resources :favourites, only: [:destroy]
+  resources :collections, only: [:destroy]
 end
