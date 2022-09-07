@@ -1,5 +1,6 @@
 <div class="card-category">
   <h1>Restaurants</h1>
+<<<<<<< HEAD
   <div class="content">
     <% @restaurants.each do |restaurant| %>
       <div class="cards">
@@ -15,4 +16,21 @@
       </div>
     <% end %>
   </div>
+=======
+  <ol>
+    <div class="content">
+      <% @restaurants.each do |restaurant| %>
+        <div class="cards">
+          <% if restaurant.photo.attached? %>
+            <%= cl_image_tag restaurant.photo.key, :class => "image-show" %>
+            <li><b><%= link_to restaurant.name, restaurant_path(restaurant)  %></b> | <%= restaurant.cuisine %><p><%= restaurant.description %><br><%= link_to "Find out more!", restaurant_path(restaurant) %></p></li>
+          <% else %>
+            <img src="https://res.cloudinary.com/heefang/image/upload/v1659753817/cld-sample-4.jpg" class="image-show">
+            <li><b><%= link_to restaurant.name, restaurant_path(restaurant)  %></b> | <%= restaurant.cuisine %><p><%= restaurant.description %><br><%= link_to "Find out more!", restaurant_path(restaurant) %></p></li>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </ol>
+>>>>>>> fed1ef0d49056be6283596de43fbedc92cc2dcd9
 </div>
