@@ -17,8 +17,14 @@
             <p><%= r.restaurant.description %></p>
           </div>
           <div class="choice">
-            <%= link_to icon("fas", "thumbs-up"), new_restaurant_favourite_path(r.restaurant) %>
-            <%= link_to icon("fas", "forward-step"),
+            <%= simple_form_for [r.restaurant, @favourite] do |f| %>
+              <%= f.input :restaurant_id, input_html: { value: r.restaurant }, as: :hidden  %>
+              <%= f.input :user_id, input_html: { value: current_user.id }, as: :hidden  %>
+                <%= button_tag(type: 'submit', class:"fav-button") do %>
+                  <i class="fa-regular fa-heart"></i>
+                <% end %>
+            <% end %>
+            <%= link_to icon("fa", "forward-step"),
               collection_path(r),
               data: {turbo_method: :delete}
             %>
