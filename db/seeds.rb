@@ -125,5 +125,6 @@ puts "creating collection..."
 collection1 = Collection.create!(user: user, restaurant: restaurant)
 collection2 = Collection.create!(user: user, restaurant: restaurant2)
 collection3 = Collection.create!(user: user, restaurant: restaurant3)
+collection4 = Collection.create!(user: user, restaurant: restaurant4)
 
 puts "Done"

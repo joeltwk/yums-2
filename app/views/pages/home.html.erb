@@ -1,22 +1,31 @@
 <% if @restaurants.nil? %>
+  <p>
+  <center><img src="https://res.cloudinary.com/heefang/image/upload/c_scale,h_500/v1661358673/yumsphone_vgistk.png" alt="Yums App"></center>
+  </p>
 <% else %>
   <% @restaurants.each do |r| %>
     <% if r.user === current_user %>
       <div id="next-restaurant">
         <div class="card">
-          <%= r.restaurant.name %>
-          <%= link_to "Yes", new_restaurant_favourite_path(r.restaurant) %>
-          <%= link_to "No",
-            collection_path(r),
-            data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
-          %>
+          <% if r.restaurant.photo.attached? %>
+            <%= cl_image_tag r.restaurant.photo.key, :class => "image-show" %>
+          <% else %>
+            <img src="https://res.cloudinary.com/dswoabunp/image/upload/v1659754023/samples/food/dessert.jpg"/>
+          <% end %>
+          <div class="card-body">
+            <h6><%= r.restaurant.name %></h6>
+            <p><%= r.restaurant.description %></p>
+          </div>
+          <div class="choice">
+            <%= link_to icon("fas", "thumbs-up"), new_restaurant_favourite_path(r.restaurant) %>
+            <%= link_to icon("fas", "forward-step"),
+              collection_path(r),
+              data: {turbo_method: :delete}
+            %>
+          </div>
         </div>
       </div>
       <% break %>
     <% end %>
   <% end %>
 <% end %>
-
-<p>
-  <center><img src="https://res.cloudinary.com/heefang/image/upload/c_scale,h_500/v1661358673/yumsphone_vgistk.png" alt="Yums App"></center>
-</p>
