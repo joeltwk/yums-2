@@ -114,9 +114,10 @@
 
 // follow list css
 
-.follow-profile-container {
+.follow-profile {
   display: flex;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .follow-profile-pic {
@@ -140,4 +141,67 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.follow-no-profile .fa-user {
+  font-size: 1.5em;
+  color: darkcyan;
+}
+
+.follow-unfollow-btn {
+  text-decoration: none;
+  color: black;
+  padding: 8px 20px;
+  border-radius: 10px;
+  border: solid 1px rgb(255, 178, 54);
+  margin: 0 5px;
+}
+
+.follow-profile-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+// follow list
+
+.follow-search-bar {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.follow-search-bar .form-control {
+  border-bottom-left-radius: 18px;
+  border-top-left-radius: 18px;
+}
+
+.follow-search-btn {
+  width: 100px;
+  border: 0px;
+  background-color: rgb(255, 178, 54);
+  border-bottom-right-radius: 18px;
+  border-top-right-radius: 18px;
+}
+
+// navbar profile
+
+.navbar-no-profile {
+  background-color: rgb(255, 243, 184);
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-fa-user {
+  font-size: 2em;
+  color: darkcyan;
+}
+
+.navbar-profile-pic {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
 }

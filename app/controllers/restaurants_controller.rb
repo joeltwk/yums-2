@@ -4,6 +4,11 @@ class RestaurantsController < ApplicationController
   def show
     @restaurant = Restaurant.find(params[:id])
     @reviews = Review.where(restaurant_id: @restaurant)
+    if @restaurant.favourites.find_by(user_id: current_user.id).nil?
+      @favourite = Favourite.new
+    else
+      @favourite = Favourite.find_by(user_id: current_user.id, restaurant_id: @restaurant.id)
+    end
   end
 
   def index
@@ -17,7 +22,19 @@ class RestaurantsController < ApplicationController
   def create
     @restaurant = Restaurant.new(restaurant_params)
     @restaurant.user = current_user
+    @user = User.all
     if @restaurant.save
+      @user.each do |user|
+        if user.role === "regular"
+          @collection = Collection.new
+          @collection.restaurant = @restaurant
+          @collection.user = user
+          if @collection.save
+          else
+            render :new, status: :unprocessable_entity
+          end
+        end
+      end
       redirect_to restaurant_path(@restaurant)
     else
       render :new, status: :unprocessable_entity

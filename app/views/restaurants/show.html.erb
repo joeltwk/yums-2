@@ -1,5 +1,9 @@
 <div class="card-category">
-  <%= cl_image_tag @restaurant.photo.key, :class => "image-show" %>
+  <% if @restaurant.photo.attached? %>
+    <%= cl_image_tag @restaurant.photo.key, :class => "image-show" %>
+  <% else %>
+    <img src="https://res.cloudinary.com/heefang/image/upload/v1659753817/cld-sample-4.jpg" class="image-show">
+  <% end %>
   <div class="restaurant-infos">
     <div>
       <div class="restaurant-details">
@@ -11,12 +15,22 @@
         <h6>Location: </h6>
         <p><%= @restaurant.address %></p>
       </div>
+      <div class="bookmark">
+        <% if @restaurant.favourites.find_by(user_id: current_user.id) == nil %>
+          <p><%= render "favourites/form", favourite: @favourite %></p>
+        <% else %>
+          <p>
+            <%= link_to icon('fa-solid', 'heart'), favourite_path(@favourite),
+            data: {turbo_method: :delete} %> Added to Favourites
+          </p>
+        <% end %>
+      </div>
       <div class="review-container">
         <div class="review"><h3><b>Reviews</b></h3>
           <% @reviews.each do |review| %>
             <div class="reviewer">
               <div class="review-avatar">
-                <p><b>"Avatar Icon"</b><br> <%# insert avator code here #%>
+                <img class="avatar dropdown-toggle" src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
                 <%= review.user.name %></p>
               </div>
               <div class="description">
