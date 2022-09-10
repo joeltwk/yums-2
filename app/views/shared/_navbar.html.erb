@@ -30,27 +30,29 @@
           </div>
         <% end %>
       </div>
-      <%# Favourites Link %>
-      <div class="nav-item d-flex flex-column justify-content-center align-items-center">
-        <%= link_to user_favourites_path(current_user) do %>
+      <% if user_signed_in? %>
+        <%# Favourites Link %>
+        <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+          <%= link_to user_favourites_path(current_user) do %>
           <div class="nav-item-icon flex-grow-1">
             <i class="fa-solid fa-heart"></i>
           </div>
           <div class="nav-item-text mb-1">
             Faves
           </div>
-        <% end %>
-      </div>
-      <%# Profile Link %>
-      <div class="nav-item d-flex flex-column justify-content-center align-items-center">
-        <%= link_to user_path(current_user) do %>
-          <div class="nav-item-icon flex-grow-1">
-            <i class="fa-solid fa-user" id="nav-user"></i>
-          </div>
-          <div class="nav-item-text mb-1">
-            Profile
-          </div>
-        <% end %>
-      </div>
+          <% end %>
+        </div>
+        <%# Profile Link %>
+        <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+          <%= link_to user_path(current_user) do %>
+            <div class="nav-item-icon flex-grow-1">
+              <i class="fa-solid fa-user" id="nav-user"></i>
+            </div>
+            <div class="nav-item-text mb-1">
+              Profile
+            </div>
+          <% end %>
+        </div>
+      <% end %>
   </div>
 </div>
