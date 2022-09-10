@@ -85,4 +85,15 @@ restaurant4 = Restaurant.create!(
 restaurant4.photo.attach(io: file4, filename: "ririmala.png", content_type: "image/png")
 restaurant4.save!
 
+puts "destroying collection..."
+
+Collection.destroy_all
+
+puts "creating collection..."
+
+collection1 = Collection.create!(user: user, restaurant: restaurant)
+collection2 = Collection.create!(user: user, restaurant: restaurant2)
+collection3 = Collection.create!(user: user, restaurant: restaurant3)
+collection4 = Collection.create!(user: user, restaurant: restaurant4)
+
 puts "Done"

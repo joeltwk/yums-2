@@ -1,3 +1,6 @@
+<div class="header">
+  <h1>User Profile</h1>
+</div>
 <div class="profile-container" data-controller="add-profile-image">
   <div class="profile-top">
     <% if current_user.id != @user.id %>
@@ -55,7 +58,7 @@
       <% if current_user.id != @user.id %>
         <% if @current_user_friends_users.include?(@user.id) %>
             <%= link_to 'Unfollow',
-                user_friend_path(@current_friend),
+                friend_path(@current_friend),
                 data: {turbo_method: :delete}, :class => 'unfollow-btn'%>
           <% else %>
             <%= simple_form_for [@user, @friend] do |f| %>

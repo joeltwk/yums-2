@@ -10,8 +10,15 @@ class FavouritesController < ApplicationController
     @favourite = Favourite.new
     @favourite.restaurant = @restaurant
     @favourite.user = current_user
+    @collection = Collection.all
+    @collection = @collection.find_by(restaurant: @restaurant, user: current_user)
     if @favourite.save
-      redirect_to restaurant_path(@restaurant)
+      @collection.destroy
+      if params[:favourite][:location] === "home"
+        redirect_to root_path
+      else
+        redirect_to restaurant_path(@restaurant)
+      end
     else
       render :new, status: :unprocessable_entity
     end

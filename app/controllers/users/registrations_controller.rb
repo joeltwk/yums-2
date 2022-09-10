@@ -12,6 +12,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super
+    if params[:user][:role] === "regular"
+      @restaurant = Restaurant.all
+      @restaurant.each do |rest|
+        @collection = Collection.new
+        @collection.restaurant = rest
+        @collection.user = current_user
+        if @collection.save
+        else
+          render :new, status: :unprocessable_entity
+        end
+      end
+    end
   end
 
   # GET /resource/edit
