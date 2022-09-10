@@ -1,46 +1,52 @@
-<% if @restaurants.nil? %>
-  <p>
-  <center><img src="https://res.cloudinary.com/heefang/image/upload/c_scale,h_500/v1661358673/yumsphone_vgistk.png" alt="Yums App"></center>
-  </p>
-<% else %>
-  <% @restaurants.each do |r| %>
-    <% if r.user === current_user %>
-      <div id="next-restaurant">
-        <div class="card">
-          <% if r.restaurant.photo.attached? %>
-            <%= cl_image_tag r.restaurant.photo.key, :class => "image-show" %>
-          <% else %>
-            <img src="https://res.cloudinary.com/dswoabunp/image/upload/v1659754023/samples/food/dessert.jpg"/>
-          <% end %>
-          <div class="card-body">
-            <h6><%= r.restaurant.name %></h6>
-            <p><%= r.restaurant.description %></p>
-          </div>
-          <div class="choice">
-            <%= simple_form_for [r.restaurant, @favourite] do |f| %>
-              <%= f.input :restaurant_id, input_html: { value: r.restaurant }, as: :hidden  %>
-              <%= f.input :user_id, input_html: { value: current_user.id }, as: :hidden  %>
-              <%= f.input :location, input_html: { value: "home" }, as: :hidden  %>
-                <%= button_tag(type: 'submit', class:"fav-button") do %>
-                  <i class="fa-regular fa-heart"></i>
-                <% end %>
+<div class="header">
+  <h1>Check this out...</h1>
+</div>
+
+<div class="card-container">
+  <% if @restaurants.nil? %>
+    <p>
+    <center><img src="https://res.cloudinary.com/heefang/image/upload/c_scale,h_500/v1661358673/yumsphone_vgistk.png" alt="Yums App"></center>
+    </p>
+  <% else %>
+    <% @restaurants.each do |r| %>
+      <% if r.user === current_user %>
+        <div id="next-restaurant">
+          <div class="card">
+            <% if r.restaurant.photo.attached? %>
+              <%= cl_image_tag r.restaurant.photo.key, :class => "image-show" %>
+            <% else %>
+              <img src="https://res.cloudinary.com/dswoabunp/image/upload/v1659754023/samples/food/dessert.jpg"/>
             <% end %>
-            <%= link_to icon("fa", "forward-step"),
-              collection_path(r),
-              data: {turbo_method: :delete}
-            %>
+            <div class="card-body">
+              <h6><%= r.restaurant.name %></h6>
+              <p><%= r.restaurant.description %></p>
+            </div>
+            <div class="choice">
+              <%= simple_form_for [r.restaurant, @favourite] do |f| %>
+                <%= f.input :restaurant_id, input_html: { value: r.restaurant }, as: :hidden  %>
+                <%= f.input :user_id, input_html: { value: current_user.id }, as: :hidden  %>
+                <%= f.input :location, input_html: { value: "home" }, as: :hidden  %>
+                  <%= button_tag(type: 'submit', class:"fav-button") do %>
+                    <i class="fa-solid fa-heart home-heart"></i>
+                  <% end %>
+              <% end %>
+              <%= link_to icon("fa", "play"),
+                collection_path(r),
+                data: {turbo_method: :delete}
+              %>
+            </div>
           </div>
         </div>
-      </div>
-      <% break %>
-    <% else %>
-        <% if current_user.role === "owner" %>
-        <% else %>
-          <div class="card">
-            <p>Sorry, you have ran out of restaurants to view.</p>
-            <p>Click <%= link_to "here", user_favourites_path(current_user) %> to view your favourites!</p>
-          </div>
-        <% end %>
+        <% break %>
+      <% else %>
+          <% if current_user.role === "owner" %>
+          <% else %>
+            <div class="card">
+              <p>Sorry, you have ran out of restaurants to view.</p>
+              <p>Click <%= link_to "here", user_favourites_path(current_user) %> to view your favourites!</p>
+            </div>
+          <% end %>
+      <% end %>
     <% end %>
   <% end %>
-<% end %>
+</div>
