@@ -5,12 +5,16 @@
   <% if @restaurant.photo.attached? %>
     <%= cl_image_tag @restaurant.photo.key, :class => "image-show" %>
   <% else %>
-    <img src="https://res.cloudinary.com/heefang/image/upload/v1659753817/cld-sample-4.jpg" class="image-show">
+    <div class="no-image">
+      <h2>No Image</h2>
+    </div>
   <% end %>
   <div class="restaurant-infos">
     <div>
       <div class="restaurant-details">
         <h1><b><%= @restaurant.name %></b></h1>
+        <h6>Rating:</h6>
+        <p><%= @avg_rating %></p>
         <h6>Cuisine:</h6>
         <p><%= @restaurant.cuisine %></p>
         <h6>Description: </h6>
@@ -34,7 +38,7 @@
             <div class="reviewer">
               <div class="review-avatar">
                 <img class="avatar dropdown-toggle" src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
-                <%= review.user.name %></p>
+                <p><%= review.user.name %></p>
               </div>
               <div class="description">
                 <p><b>Rating: </b><%= review.rating %>

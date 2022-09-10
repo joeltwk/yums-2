@@ -9,11 +9,13 @@
           <%= link_to restaurant_path(restaurant) do %>
             <%= cl_image_tag restaurant.photo.key, :class => "image-show" %>
           <% end %>
-          <h4><b><%= link_to restaurant.name, restaurant_path(restaurant)  %></b></h4>
-          <h5><%= restaurant.cuisine %></h5><p><%= restaurant.description %><br><%= link_to "Find out more!", restaurant_path(restaurant) %></p>
         <% else %>
-          <%= "" %>
+          <div class="no-image">
+            <h2>No Image</h2>
+          </div>
         <% end %>
+        <h4><b><%= link_to restaurant.name, restaurant_path(restaurant)  %></b></h4>
+        <h5><%= restaurant.cuisine %></h5><p><%= restaurant.description %><br><%= link_to "Find out more!", restaurant_path(restaurant) %></p>
       </div>
     <% end %>
   </div>

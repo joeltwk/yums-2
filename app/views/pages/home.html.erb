@@ -22,10 +22,10 @@
               <%= f.input :user_id, input_html: { value: current_user.id }, as: :hidden  %>
               <%= f.input :location, input_html: { value: "home" }, as: :hidden  %>
                 <%= button_tag(type: 'submit', class:"fav-button") do %>
-                  <i class="fa-regular fa-heart"></i>
+                  <i class="fa-solid fa-heart home-heart"></i>
                 <% end %>
             <% end %>
-            <%= link_to icon("fa", "forward-step"),
+            <%= link_to icon("fa", "play"),
               collection_path(r),
               data: {turbo_method: :delete}
             %>
