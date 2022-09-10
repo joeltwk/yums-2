@@ -1,0 +1,60 @@
+<div class="navbar fixed-bottom">
+  <div class="container-fluid">
+    <%= link_to root_path, class: "navbar-brand" do %>
+      <%= image_tag "https://res.cloudinary.com/heefang/image/upload/v1661357606/yum_icon_white_xa7lyn.png" %>
+    <% end %>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" data-controller="dropdown">
+      <ul class="navbar-nav me-auto">
+        <% if user_signed_in? %>
+          <li class="nav-item active">
+            <%= link_to "Home", "/", class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "My Favourites", "#", class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "All Restaurants", "/restaurants", class: "nav-link" %>
+          </li>
+          <% if current_user.role == "owner" %>
+            <li class="nav-item">
+              <%= link_to "Create a Restaurant", new_restaurant_path, class: "nav-link" %>
+            </li>
+          <% end %>
+          <li class="nav-item dropdown">
+              <%# <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar dropdown-toggle" %>
+            <div class="profile-image" data-action="click->dropdown#toggle">
+              <% if current_user.photo.attached? %>
+                <%= cl_image_tag current_user.photo.key, crop: :thumb, gravity: :face, :class => 'navbar-profile-pic' %>
+                <% else %>
+                <div class='navbar-no-profile'>
+                <i class="fa-solid fa-user navbar-fa-user"></i>
+                </div>
+              <% end %>
+            </div>
+            <div
+              data-dropdown-target="menu"
+              class="d-none">
+              <%= link_to "My Profile", user_path(current_user) %>
+              <%= button_to("Log Out", destroy_user_session_path, method: :delete) %>
+            </div>
+            <%# <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+            <%# <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+              <%= link_to "Action", "#", class: "dropdown-item" %>
+              <%# <%= link_to "Another action", "#", class: "dropdown-item" %>
+              <%# <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+            <%# </div> %>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
