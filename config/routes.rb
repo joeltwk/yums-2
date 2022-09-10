@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :friends, only: %i[index new create show]
     resources :followers, only: %i[index]
     resources :favourites, only: [:show, :index]
+    get "restaurants", to: "restaurants#restaurants"
   end
   resources :friends, only: [:destroy]
   resources :reviews, only: %i[show edit update]

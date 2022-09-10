@@ -28,6 +28,10 @@ class RestaurantsController < ApplicationController
     @restaurant = Restaurant.new
   end
 
+  def restaurants
+    @restaurants = Restaurant.where(user_id: params[:user_id])
+  end
+
   def create
     @restaurant = Restaurant.new(restaurant_params)
     @restaurant.user = current_user
