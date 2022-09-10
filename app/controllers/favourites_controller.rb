@@ -11,10 +11,11 @@ class FavouritesController < ApplicationController
     @favourite.restaurant = @restaurant
     @favourite.user = current_user
     @collection = Collection.all
-    @collection = @collection.find_by(restaurant: @restaurant, user: current_user)
+    collection = @collection.find_by(restaurant: @restaurant, user: current_user)
+
     if @favourite.save
-      @collection.destroy if @collection
-      if params[:favourite][:location] === "home"
+      collection.destroy unless collection.nil?
+      if params[:favourite][:location] == "home"
         redirect_to root_path
       else
         redirect_to restaurant_path(@restaurant)
