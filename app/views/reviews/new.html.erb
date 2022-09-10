@@ -3,6 +3,6 @@
 <p>User Name: <%= current_user.name %></p>
 <%= simple_form_for [@restaurant, @review] do |f| %>
   <%= f.input :comment %>
-  <%= f.input :rating %>
+  <%= f.input :rating, :collection => %w[1 2 3 4 5] %>
   <%= f.submit %>
 <% end %>

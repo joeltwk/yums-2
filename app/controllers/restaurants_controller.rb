@@ -9,6 +9,15 @@ class RestaurantsController < ApplicationController
     else
       @favourite = Favourite.find_by(user_id: current_user.id, restaurant_id: @restaurant.id)
     end
+    @ratings = []
+    @restaurant.reviews.each do |review|
+      @ratings << review.rating
+    end
+    if @ratings.count.positive?
+      @avg_rating = @ratings.sum / @ratings.count
+    else
+      @avg_rating = "No ratings yet"
+    end
   end
 
   def index
@@ -17,6 +26,10 @@ class RestaurantsController < ApplicationController
 
   def new
     @restaurant = Restaurant.new
+  end
+
+  def restaurants
+    @restaurants = Restaurant.where(user_id: params[:user_id])
   end
 
   def create

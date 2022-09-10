@@ -1,5 +1,43 @@
 <div class="navbar fixed-bottom">
   <div class="container-fluid d-flex justify-content-around">
+    <% if user_signed_in? && current_user.role == "owner" %>
+      <%# My Restaurant Link %>
+      <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+        <%= link_to user_restaurants_path(current_user.id) do %>
+          <div class="nav-item-icon flex-grow-1">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+          <div class="nav-item-text mb-1">
+            Restaurants
+          </div>
+        <% end %>
+      </div>
+
+      <%# Add Restaurant Link %>
+      <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+        <%= link_to new_restaurant_path do %>
+          <div class="nav-item-icon flex-grow-1">
+            <i class="fa-solid fa-plus"></i>
+          </div>
+          <div class="nav-item-text mb-1">
+            Add
+          </div>
+        <% end %>
+      </div>
+
+      <%# Profile Link %>
+      <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+        <%= link_to user_path(current_user) do %>
+          <div class="nav-item-icon flex-grow-1">
+            <i class="fa-solid fa-user" id="nav-user"></i>
+          </div>
+          <div class="nav-item-text mb-1">
+            Profile
+          </div>
+        <% end %>
+      </div>
+
+    <% elsif user_signed_in? %>
       <%# All Restaurants Link %>
       <div class="nav-item d-flex flex-column justify-content-center align-items-center">
         <%= link_to restaurants_path do %>
@@ -30,29 +68,52 @@
           </div>
         <% end %>
       </div>
-      <% if user_signed_in? %>
-        <%# Favourites Link %>
-        <div class="nav-item d-flex flex-column justify-content-center align-items-center">
-          <%= link_to user_favourites_path(current_user) do %>
+      <%# Favourites Link %>
+      <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+        <%= link_to user_favourites_path(current_user) do %>
+        <div class="nav-item-icon flex-grow-1">
+          <i class="fa-solid fa-heart"></i>
+        </div>
+        <div class="nav-item-text mb-1">
+          Faves
+        </div>
+        <% end %>
+      </div>
+      <%# Profile Link %>
+      <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+        <%= link_to user_path(current_user) do %>
           <div class="nav-item-icon flex-grow-1">
-            <i class="fa-solid fa-heart"></i>
+            <i class="fa-solid fa-user" id="nav-user"></i>
           </div>
           <div class="nav-item-text mb-1">
-            Faves
+            Profile
           </div>
-          <% end %>
-        </div>
-        <%# Profile Link %>
-        <div class="nav-item d-flex flex-column justify-content-center align-items-center">
-          <%= link_to user_path(current_user) do %>
-            <div class="nav-item-icon flex-grow-1">
-              <i class="fa-solid fa-user" id="nav-user"></i>
-            </div>
-            <div class="nav-item-text mb-1">
-              Profile
-            </div>
-          <% end %>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
+
+      <% else %>
+      <%# All Restaurants Link %>
+      <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+        <%= link_to restaurants_path do %>
+          <div class="nav-item-icon flex-grow-1">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+          <div class="nav-item-text mb-1">
+            All
+          </div>
+        <% end %>
+      </div>
+      <%# Search Link %>
+      <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+        <%= link_to restaurants_path do %>
+          <div class="nav-item-icon flex-grow-1">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <div class="nav-item-text mb-1">
+            Search
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
 </div>
