@@ -6,6 +6,18 @@ class PagesController < ApplicationController
     @favourite = Favourite.new
   end
 
+  def search
+    if params[:query].present?
+      sql_query = <<~SQL
+        name ILIKE :query
+        OR description ILIKE :query
+        OR cuisine ILIKE :query
+        OR address ILIKE :query
+      SQL
+      @restaurants = Restaurant.where(sql_query, query: "%#{params[:query]}%")
+    end
+  end
+
   private
 
   def user_login?

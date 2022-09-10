@@ -1,0 +1,28 @@
+<%= form_with url: search_path, method: :get, class: "d-flex" do %>
+  <%= text_field_tag :query,
+    params[:query],
+    class: "form-control",
+    placeholder: "Find a restaurant"
+  %>
+  <%= submit_tag "Search", class: "btn btn-primary" %>
+<% end %>
+
+<% if @restaurants.nil? || @restaurants.empty? %>
+<% else %>
+  <div class="search-container">
+    <% @restaurants.each do |r| %>
+      <div id="search-next">
+        <div class="search-card">
+          <% if r.photo.attached? %>
+            <%= cl_image_tag r.photo.key, :class => "image-show" %>
+          <% else %>
+            <img src="https://res.cloudinary.com/dswoabunp/image/upload/v1659754023/samples/food/dessert.jpg"/>
+          <% end %>
+          <div class="search-card-body">
+            <h6><%= link_to r.name, restaurant_path(r) %></h6>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
