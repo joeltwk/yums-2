@@ -20,14 +20,13 @@
       </div>
       <div class="bookmark">
         <% if @restaurant.favourites.find_by(user_id: current_user.id) == nil %>
-          <p><%= render "favourites/form", favourite: @favourite %></p>
+          <%= render "favourites/form", favourite: @favourite %>
         <% else %>
-          <p>
             <%= link_to icon('fa-solid', 'heart'), favourite_path(@favourite),
             data: {turbo_method: :delete} %> Added to Favourites
-          </p>
         <% end %>
       </div>
+      <br>
       <div class="review-container">
         <div class="review"><h3><b>Reviews</b></h3>
           <% @reviews.each do |review| %>
