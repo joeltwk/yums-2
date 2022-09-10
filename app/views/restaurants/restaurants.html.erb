@@ -1,0 +1,20 @@
+<div class="header">
+  <h1>My Restaurants</h1>
+</div>
+<div class="card-category">
+  <div class="content">
+    <% @restaurants.each do |restaurant| %>
+      <div class="cards">
+        <% if restaurant.photo.attached? %>
+          <%= link_to restaurant_path(restaurant) do %>
+            <%= cl_image_tag restaurant.photo.key, :class => "image-show" %>
+          <% end %>
+          <h4><b><%= link_to restaurant.name, restaurant_path(restaurant)  %></b></h4>
+          <h5><%= restaurant.cuisine %></h5><p><%= restaurant.description %><br><%= link_to "Find out more!", restaurant_path(restaurant) %></p>
+        <% else %>
+          <%= "" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
