@@ -9,6 +9,7 @@
     "bootstrap": "^5.2.0",
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
+    "star-rating.js": "^4.3.0",
     "stimulus-dropdown": "^2.0.0",
     "swiper": "^8.3.2",
     "webpack": "^5.74.0",
