@@ -14,7 +14,18 @@
       <div class="restaurant-details">
         <h1><b><%= @restaurant.name %></b></h1>
         <h6>Rating:</h6>
-        <p><%= @avg_rating %></p>
+        <% if @avg_rating == "No ratings yet" %>
+          <p><%= @avg_rating %></p>
+        <% else %>
+          <p><%= @avg_rating %></p>
+          <div class="flex gap-x-3 mb-4">
+              <% Review::MAX_RATING.times do |n| %>
+                <%# <%= <i class="fa-light fa-star #{star_rating_class(@avg_rating, n)}"></i> %>
+                <%= inline_svg_tag("star.svg",
+                  class: "review-star w-8 h-8 #{star_rating_class(@avg_rating, n)}") %>
+              <% end %>
+        <% end %>
+            </div>
         <h6>Cuisine:</h6>
         <p><%= @restaurant.cuisine %></p>
         <h6>Description: </h6>
@@ -33,17 +44,32 @@
       <br>
       <div class="review-container">
         <div class="review"><h3><b>Reviews</b></h3>
-          <% @reviews.each do |review| %>
-            <div class="reviewer">
-              <div class="review-avatar">
-                <img class="avatar dropdown-toggle" src="https://cdn-icons-png.flaticon.com/512/149/149071.png">
-                <p><%= review.user.name %></p>
+          <% if @reviews.count < 1 %>
+            <p>No reviews yet</p>
+          <% else %>
+            <% @reviews.each do |review| %>
+              <div class="reviewer">
+                <% user = review.user %>
+                <%= link_to user_path(user), :action => 'go' do %>
+                <div class="review-avatar">
+                  <div class="profile-image" data-action="click->add-profile-image#show">
+                    <% if user.photo.attached? %>
+                      <%= cl_image_tag user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, :class => 'review-profile-pic' %>
+                      <% else %>
+                      <div class='review-no-profile'>
+                      <i class="fa-solid fa-user"></i>
+                      </div>
+                    <% end %>
+                  </div>
+                  <p><%= review.user.name %></p>
+                </div>
+                <% end %>
+                <div class="description">
+                  <p><b>Rating: </b><%= review.rating %>
+                  <br><%= review.comment %></p>
+                </div>
               </div>
-              <div class="description">
-                <p><b>Rating: </b><%= review.rating %>
-                <br><%= review.comment %></p>
-              </div>
-            </div>
+            <% end %>
           <% end %>
         </div>
       </div>
@@ -55,9 +81,34 @@
             data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
           %></p>
         <% else %>
-          <%= link_to "Add a Review", new_restaurant_review_path(@restaurant) %>
+          <button type="button" class="follow-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Add a review
+          </button>
         <% end %>
       </div>
+    </div>
+  </div>
+</div>
+
+<%# review form %>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Review</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= simple_form_for [@restaurant, @review] do |f| %>
+          <%= f.input :comment, input_html: { class: "review-comment-style" } %>
+          <%= f.input :rating, collection: [['Terrible', 1], ['Bad', 2], ['Neutral', 3], ['Good', 4], ['Awesome', 5]], label: "Rate your experience", input_html: {data: {controller: "star-rating"}} %>
+          <%= f.submit %>
+        <% end %>
+      </div>
+      <%# <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div> %>
     </div>
   </div>
 </div>

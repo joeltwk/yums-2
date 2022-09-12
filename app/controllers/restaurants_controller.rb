@@ -14,10 +14,11 @@ class RestaurantsController < ApplicationController
       @ratings << review.rating
     end
     if @ratings.count.positive?
-      @avg_rating = @ratings.sum / @ratings.count
+      @avg_rating = (@ratings.sum / @ratings.count).round(1)
     else
       @avg_rating = "No ratings yet"
     end
+    @review = Review.new
   end
 
   def index
