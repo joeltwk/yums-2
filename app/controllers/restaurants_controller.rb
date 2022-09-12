@@ -4,10 +4,12 @@ class RestaurantsController < ApplicationController
   def show
     @restaurant = Restaurant.find(params[:id])
     @reviews = Review.where(restaurant_id: @restaurant)
-    if @restaurant.favourites.find_by(user_id: current_user.id).nil?
-      @favourite = Favourite.new
-    else
-      @favourite = Favourite.find_by(user_id: current_user.id, restaurant_id: @restaurant.id)
+    if user_signed_in?
+      if @restaurant.favourites.find_by(user_id: current_user.id).nil?
+        @favourite = Favourite.new
+      else
+        @favourite = Favourite.find_by(user_id: current_user.id, restaurant_id: @restaurant.id)
+      end
     end
     @ratings = []
     @restaurant.reviews.each do |review|

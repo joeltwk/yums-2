@@ -22,14 +22,19 @@
         <h6>Location: </h6>
         <p><%= @restaurant.address %></p>
       </div>
-      <div class="bookmark">
-        <% if @restaurant.favourites.find_by(user_id: current_user.id) == nil %>
-          <%= render "favourites/form", favourite: @favourite %>
-        <% else %>
-            <%= link_to icon('fa-solid', 'heart'), favourite_path(@favourite),
-            data: {turbo_method: :delete} %> Added to Favourites
-        <% end %>
-      </div>
+      <%# Show Bookmark buttons if user is signed in %>
+      <% if user_signed_in? %>
+        <div class="bookmark">
+          <% if @restaurant.favourites.find_by(user_id: current_user.id) == nil %>
+            <p><%= render "favourites/form", favourite: @favourite %></p>
+          <% else %>
+            <p>
+              <%= link_to icon('fa-solid', 'heart'), favourite_path(@favourite),
+              data: {turbo_method: :delete} %> Added to Favourites
+            </p>
+          <% end %>
+        </div>
+      <% end %>
       <br>
       <div class="review-container">
         <div class="review"><h3><b>Reviews</b></h3>
@@ -48,13 +53,13 @@
         </div>
       </div>
       <div class="restaurant-edit">
-        <% if current_user.role === 'owner' %>
+        <% if user_signed_in? && current_user.role == 'owner' %>
           <p><%= link_to "Edit Restaurant", edit_restaurant_path(@restaurant) %>
           | <%= link_to "Delete",
             restaurant_path(@restaurant),
             data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
           %></p>
-        <% else %>
+        <% elseif user_signed_in? %>
           <%= link_to "Add a Review", new_restaurant_review_path(@restaurant) %>
         <% end %>
       </div>
