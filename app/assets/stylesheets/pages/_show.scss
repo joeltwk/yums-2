@@ -60,7 +60,7 @@ p {
 }
 
 .restaurant-edit {
-  margin-top: 3px;
+  margin-top: 15px;
   text-align: center;
   padding: center;
   justify-content: center;
@@ -77,4 +77,43 @@ a:hover {
 
 .bookmark {
   font-size: 12px;
+}
+
+.review-no-profile {
+  background-color: rgb(255, 243, 184);
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+}
+
+.review-profile-pic {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+}
+
+.review-star {
+  height: 20px;
+}
+
+.fill-yellow-400 {
+  fill: #eda62b;
+  stroke: #eda62b;
+}
+
+.stroke-gray-400 {
+  stroke: rgb(123, 123, 123);
+}
+
+.avg-rating {
+  margin-bottom: 2px;
+  font-size: medium;
+}
+
+.restaurant-infos p {
+  font-size: small;
 }
