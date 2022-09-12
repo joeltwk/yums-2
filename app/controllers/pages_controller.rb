@@ -2,7 +2,7 @@ class PagesController < ApplicationController
   before_action :user_login?, only: [:home]
 
   def home
-    @restaurants = Collection.all
+    @restaurants = Collection.where(user: current_user).limit(5)
     @favourite = Favourite.new
   end
 
