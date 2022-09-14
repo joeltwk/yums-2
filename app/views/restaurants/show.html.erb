@@ -1,5 +1,5 @@
-<div class="header">
-  <h1>Restaurant Details</h1>
+<div class="back-button">
+  <span><%= link_to icon('fa-solid', 'arrow-left')+" Back", restaurants_path %></span>
 </div>
 <div class="card-category">
   <% if @restaurant.photo.attached? %>
@@ -12,7 +12,22 @@
   <div class="restaurant-infos">
     <div>
       <div class="restaurant-details">
-        <h1><b><%= @restaurant.name %></b></h1>
+        <div class="restaurant-title-block d-flex justify-content-between">
+          <div class="restaurant-title mt-3"><h1><%= @restaurant.name %></h1></div>
+          <%# Show Bookmark buttons if user is signed in %>
+          <% if user_signed_in? %>
+            <div class="bookmark">
+              <% if @restaurant.favourites.find_by(user_id: current_user.id) == nil %>
+                <%= render "favourites/form", favourite: @favourite %>
+              <% else %>
+                <div class="delete-button mt-3">
+                  <%= link_to icon('fa-solid', 'heart'), favourite_path(@favourite),
+                  data: {turbo_method: :delete} %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
         <h6>Rating:</h6>
         <% if @avg_rating == "No ratings yet" %>
           <p><%= @avg_rating %></p>
@@ -33,20 +48,7 @@
         <h6>Location: </h6>
         <p><%= @restaurant.address %></p>
       </div>
-      <%# Show Bookmark buttons if user is signed in %>
-      <% if user_signed_in? %>
-        <div class="bookmark">
-          <% if @restaurant.favourites.find_by(user_id: current_user.id) == nil %>
-            <p><%= render "favourites/form", favourite: @favourite %></p>
-          <% else %>
-            <p>
-              <%= link_to icon('fa-solid', 'heart'), favourite_path(@favourite),
-              data: {turbo_method: :delete} %> Added to Favourites
-            </p>
-          <% end %>
-        </div>
-      <% end %>
-      <br>
+
       <div class="review-container">
         <div class="review"><h3><b>Reviews</b></h3>
           <% if @reviews.count < 1 %>

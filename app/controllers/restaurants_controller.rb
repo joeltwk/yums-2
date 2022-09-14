@@ -2,6 +2,7 @@ class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
 
   def show
+    @title = "Restaurant Details"
     @restaurant = Restaurant.find(params[:id])
     @reviews = Review.where(restaurant_id: @restaurant)
     if user_signed_in?
@@ -24,6 +25,8 @@ class RestaurantsController < ApplicationController
   end
 
   def index
+    @title = "All Restaurants"
+    @tab = 1
     @restaurants = Restaurant.all
   end
 

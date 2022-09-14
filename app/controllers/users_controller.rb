@@ -2,6 +2,8 @@ class UsersController < ApplicationController
   before_action :set_user, only: %i[show update]
 
   def show
+    @tab = 5
+    @title = "User Profile"
     @friend = Friend.new
     @following = Friend.where(follower_id: @user.id)
     @followers = Friend.where(followee_id: @user.id)

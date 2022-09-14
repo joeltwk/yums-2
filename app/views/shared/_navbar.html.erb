@@ -39,7 +39,11 @@
 
     <% elsif user_signed_in? %>
       <%# All Restaurants Link %>
-      <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+      <% if @tab == 1 %>
+        <div class="nav-item d-flex flex-column justify-content-center align-items-center active-tab">
+      <% else %>
+        <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+      <% end %>
         <%= link_to restaurants_path do %>
           <div class="nav-item-icon flex-grow-1">
             <i class="fa-solid fa-utensils"></i>
@@ -69,7 +73,11 @@
         <% end %>
       </div>
       <%# Favourites Link %>
-      <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+      <% if @tab == 4 %>
+        <div class="nav-item d-flex flex-column justify-content-center align-items-center active-tab">
+      <% else %>
+        <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+      <% end %>
         <%= link_to user_favourites_path(current_user) do %>
         <div class="nav-item-icon flex-grow-1">
           <i class="fa-solid fa-heart"></i>
@@ -80,7 +88,11 @@
         <% end %>
       </div>
       <%# Profile Link %>
-      <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+      <% if @tab == 5 %>
+        <div class="nav-item d-flex flex-column justify-content-center align-items-center active-tab">
+      <% else %>
+        <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+      <% end %>
         <%= link_to user_path(current_user) do %>
           <div class="nav-item-icon flex-grow-1">
             <i class="fa-solid fa-user" id="nav-user"></i>

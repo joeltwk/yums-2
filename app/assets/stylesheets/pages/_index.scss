@@ -1,8 +1,6 @@
 // Import page-specific CSS files here.
 @import "home";
 @import "profile";
-@import "show";
-@import "restaurant-index";
 
 .card {
   width: 320px;
@@ -12,10 +10,14 @@
   background-color: whitesmoke;
 }
 
+.header {
+  height: 40px;
+  width: 100%;
+}
 .header h1 {
-  font-size: 36px;
+  font-size: 20px;
   font-family: Arial, Helvetica, sans-serif;
-  text-align: left;
+  text-align: center;
   font-weight: 600;
   color: #eda62b;
   border: none;

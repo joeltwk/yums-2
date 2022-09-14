@@ -1,6 +1,3 @@
-<div class="header">
-  <h1>My Favourites</h1>
-</div>
 <ol>
   <% @favourites.each do |favourite| %>
     <% restaurant = Restaurant.find_by(id: favourite.restaurant_id) %>
