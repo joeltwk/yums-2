@@ -3,7 +3,7 @@
 </div>
 
 <div class="card-container">
-  <% if @restaurants.nil? || @restaurants.empty? %>
+  <% if current_user.view_count == 5 %>
     <% if current_user.role === "owner" %>
     <% else %>
       <div id="next-restaurant">

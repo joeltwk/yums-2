@@ -16,6 +16,12 @@ class FavouritesController < ApplicationController
     if @favourite.save
       collection.destroy unless collection.nil?
       if params[:favourite][:location] == "home"
+        if current_user.view_count.nil?
+          current_user.view_count = 1
+        else
+          current_user.view_count += 1
+        end
+        current_user.save
         redirect_to root_path
       else
         redirect_to restaurant_path(@restaurant)
