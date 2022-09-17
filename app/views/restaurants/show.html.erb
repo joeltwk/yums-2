@@ -1,6 +1,3 @@
-<div class="back-button">
-  <span><%= link_to icon('fa-solid', 'arrow-left')+" Back", restaurants_path %></span>
-</div>
 <div class="card-category">
   <% if @restaurant.photo.attached? %>
     <%= cl_image_tag @restaurant.photo.key, :class => "image-show" %>
