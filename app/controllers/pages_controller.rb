@@ -9,6 +9,16 @@ class PagesController < ApplicationController
     @title = "Recommendations"
   end
 
+  def search
+    @title = "Search"
+    if params[:query].present?
+      @restaurants = Restaurant.global_search(params[:query])
+      @users = User.global_search(params[:query])
+    end
+
+    @reviews = Review.order(rating: :desc)
+  end
+
   private
 
   def user_login?

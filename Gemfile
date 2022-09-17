@@ -60,6 +60,7 @@ gem "cloudinary"
 
 gem "inline_svg"
 
+gem 'pg_search'
 gem "sidekiq"
 gem "sidekiq-failures", "~> 1.0"
 

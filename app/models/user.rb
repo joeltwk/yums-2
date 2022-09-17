@@ -1,3 +1,5 @@
+include PgSearch::Model
+
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -18,4 +20,10 @@ class User < ApplicationRecord
   validates :role, presence: true
   has_many :restaurants
   has_many :reviews
+
+  pg_search_scope :global_search,
+  against: [:name, :description],
+  using: {
+    tsearch: { prefix: true }
+  }
 end
