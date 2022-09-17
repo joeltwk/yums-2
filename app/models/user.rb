@@ -18,8 +18,4 @@ class User < ApplicationRecord
   validates :role, presence: true
   has_many :restaurants
   has_many :reviews
-
-  private
-
-  CollectionResetJob.perform_now(self)
 end
