@@ -10,6 +10,7 @@ class PagesController < ApplicationController
   end
 
   def search
+    @title = "Search"
     if params[:query].present?
       @restaurants = Restaurant.global_search(params[:query])
       @users = User.global_search(params[:query])
