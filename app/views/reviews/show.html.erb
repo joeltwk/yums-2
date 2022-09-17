@@ -1,4 +1,59 @@
+<div class="header">
+  <h1>User Profile</h1>
+</div>
+<div class="profile-container" data-controller="add-profile-image">
+  <div class="profile-top">
+    <% if current_user.id != @user.id %>
+      <div class="profile-image">
+        <% if @user.photo.attached? %>
+          <%= cl_image_tag @user.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, :class => 'profile-pic' %>
+          <% else %>
+          <div class='no-profile'>
+          <i class="fa-solid fa-user"></i>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="profile-image" data-action="click->add-profile-image#show">
+        <% if @user.photo.attached? %>
+          <%= cl_image_tag @user.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, :class => 'profile-pic' %>
+          <% else %>
+          <div class='no-profile'>
+          <i class="fa-solid fa-user"></i>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <div class="follow-container">
+      <div class="follow-info">
+        <h3 class="follow-title">Follower</h3>
+        <div class="follow-count">
+        <%= link_to @followers.count, user_followers_path(@user), :class => 'follow-count-text' %>
+        </div>
+      </div>
+      <div class="follow-info">
+        <h3 class="follow-title">Following</h3>
+        <div class="follow-count">
+        <%= link_to @following.count, user_friends_path(@user), :class => 'follow-count-text' %>
+        </div>
+      </div>
+    </div>
+  </div>
+    <%# profile image form %>
+    <div class="add-photo-form d-none" data-add-profile-image-target='form'>
+      <%= simple_form_for(@user) do |f| %>
+        <%= f.input :photo, as: :file %>
+        <%= f.submit 'Add Image', :class => 'add-btn' %>
+      <% end %>
+    </div>
+    <%# end of profile image form %>
+</div>
+<h3>My Reviews</h3>
 <% @reviews.each do |review| %>
-  <p><%= review.restaurant.name %></p>
-  <p><%= review.comment %></p>
+  <div class="review-box">
+    <p id="restaurant-link"><%= link_to review.restaurant.name, restaurant_path(review.restaurant)  %></p>
+    <p>Rating: <%= review.rating %> <%# Will replace number with star ratings%>
+    <br><%= review.comment %></p>
+  </div>
 <% end %>
