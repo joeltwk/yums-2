@@ -8,14 +8,11 @@ class PagesController < ApplicationController
 
   def search
     if params[:query].present?
-      sql_query = <<~SQL
-        name ILIKE :query
-        OR description ILIKE :query
-        OR cuisine ILIKE :query
-        OR address ILIKE :query
-      SQL
-      @restaurants = Restaurant.where(sql_query, query: "%#{params[:query]}%")
+      @restaurants = Restaurant.global_search(params[:query])
+      @users = User.global_search(params[:query])
     end
+
+    @reviews = Review.order(rating: :desc)
   end
 
   private

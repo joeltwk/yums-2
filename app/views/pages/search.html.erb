@@ -1,3 +1,4 @@
+
 <%= form_with url: search_path, method: :get, class: "d-flex" do %>
   <%= text_field_tag :query,
     params[:query],
@@ -7,22 +8,66 @@
   <%= submit_tag "Search", class: "btn btn-primary" %>
 <% end %>
 
-<% if @restaurants.nil? || @restaurants.empty? %>
-<% else %>
-  <div class="search-container">
-    <% @restaurants.each do |r| %>
-      <div id="search-next">
-        <div class="search-card">
-          <% if r.photo.attached? %>
-            <%= cl_image_tag r.photo.key, :class => "image-show" %>
-          <% else %>
-            <img src="https://res.cloudinary.com/dswoabunp/image/upload/v1659754023/samples/food/dessert.jpg"/>
-          <% end %>
-          <div class="search-card-body">
-            <h6><%= link_to r.name, restaurant_path(r) %></h6>
+<div data-controller="tabs" data-tabs-default-tab-value="two">
+  <button id="one" data-tabs-target="btn" data-action="click->tabs#select">Top</button>
+  <button id="two" data-tabs-target="btn" data-action="click->tabs#select">Restaurants</button>
+  <button id="abc" data-tabs-target="btn" data-action="click->tabs#select">Users</button>
+  <div data-tabs-target="tab" id="one">
+    <div class="card-category">
+      <div class="content">
+        <% @reviews.each do |r| %>
+          <div class="cards">
+            <h6><%= link_to r.restaurant.name, restaurant_path(r.restaurant) %></h6>
+            <% if r.restaurant.photo.attached? %>
+              <%= cl_image_tag r.restaurant.photo.key, :class => "image-show" %>
+            <% else %>
+              <img src="https://res.cloudinary.com/dswoabunp/image/upload/v1659754023/samples/food/dessert.jpg"/>
+            <% end %>
           </div>
-        </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
   </div>
-<% end %>
+
+  <div data-tabs-target="tab" id="two">
+    <div class="card-category">
+      <div class="content">
+        <% if @restaurants.nil? || @restaurants.empty? %>
+          <h6>There are no restaurants with that name.</h6>
+        <% else %>
+          <% @restaurants.each do |r| %>
+            <div class="cards">
+              <h6><%= link_to r.name, restaurant_path(r) %></h6>
+              <% if r.photo.attached? %>
+                <%= cl_image_tag r.photo.key, :class => "image-show" %>
+              <% else %>
+                <img src="https://res.cloudinary.com/dswoabunp/image/upload/v1659754023/samples/food/dessert.jpg"/>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div data-tabs-target="tab" id="abc">
+    <div class="card-category">
+      <div class="content">
+        <% if @users.nil? || @users.empty? %>
+          <h6>There are no Users with that name.</h6>
+        <% else %>
+          <% @users.each do |r| %>
+            <div class="cards">
+              <h6><%= link_to r.name, user_path(r) %></h6>
+              <% if r.photo.attached? %>
+                <%= cl_image_tag r.photo.key, :class => "image-show" %>
+              <% else %>
+                <img src="https://res.cloudinary.com/dswoabunp/image/upload/v1659754023/samples/food/dessert.jpg"/>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
