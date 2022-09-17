@@ -1,6 +1,6 @@
 <div class="profile-container" data-controller="add-profile-image">
   <div class="profile-top">
-    <% if current_user.id != @user.id %>
+    <% if user_signed_in? && current_user.id != @user.id %>
       <div class="profile-image">
         <% if @user.photo.attached? %>
           <%= cl_image_tag @user.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, :class => 'profile-pic' %>
@@ -38,12 +38,14 @@
     </div>
   </div>
     <%# profile image form %>
-    <div class="add-photo-form d-none" data-add-profile-image-target='form'>
-      <%= simple_form_for(@user) do |f| %>
-        <%= f.input :photo, as: :file %>
-        <%= f.submit 'Add Image', :class => 'add-btn' %>
-      <% end %>
-    </div>
+    <% if user_signed_in? && @user == current_user %>
+      <div class="add-photo-form d-none" data-add-profile-image-target='form'>
+        <%= simple_form_for(@user) do |f| %>
+          <%= f.input :photo, as: :file %>
+          <%= f.submit 'Add Image', :class => 'add-btn' %>
+        <% end %>
+      </div>
+    <% end %>
     <%# end of profile image form %>
 </div>
 
@@ -52,7 +54,7 @@
   <h4 class='about'>About</h4>
   <div class="follow-btn-container">
     <div class="follow-btns">
-      <% if current_user.id != @user.id %>
+      <% if user_signed_in? && current_user.id != @user.id %>
         <% if @current_user_friends_users.include?(@user.id) %>
             <%= link_to 'Unfollow',
                 friend_path(@current_friend),
@@ -65,9 +67,9 @@
       <% end %>
     </div>
     <div class="role-btn">
-      <% if @user.role === "owner" %>
+      <% if @user == current_user && @user.role == "owner" %>
         <%= link_to "My Restaurants", user_restaurants_path(current_user.id), :class => 'unfollow-btn' %>
-      <% else %>
+      <% elsif @user == current_user %>
         <%= link_to "My Reviews", review_path, :class => 'unfollow-btn' %>
       <% end %>
     </div>
