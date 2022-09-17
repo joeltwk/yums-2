@@ -13,21 +13,27 @@ User.destroy_all
 
 puts "Creating users..."
 
-user = User.create!(
-  name: 'Test User',
-  email: 'test@email.com',
-  password: 'Password123',
-  role: 'regular'
-)
-puts "Created #{user.name}"
+numbers = Array(1..10)
 
-user2 = User.create!(
-  name: 'Test Owner',
-  email: 'owner@email.com',
-  password: 'Password123',
-  role: 'owner'
-)
-puts "Created #{user2.name}"
+numbers.each do |x|
+  user = User.create!(
+    name: "User #{x}",
+    email: "user#{x}@email.com",
+    password: "Password123",
+    role: "regular"
+  )
+  puts "Created #{user.name}"
+end
+
+numbers.each do |x|
+  owner = User.create!(
+    name: "Owner #{x}",
+    email: "owner#{x}@email.com",
+    password: "Password123",
+    role: "owner"
+  )
+  puts "Created #{owner.name}"
+end
 
 puts "Destroying restaurants..."
 Restaurant.destroy_all
@@ -35,17 +41,19 @@ Restaurant.destroy_all
 puts "Creating restaurants..."
 filepath = "db/database_test.csv"
 
+owners = User.where(role:"owner")
+
 CSV.foreach(filepath, headers: :first_row) do |row|
-  restaurant = Restaurant.create!(
+  restaurant = Restaurant.new(
     name: row[0].to_s,
     address: row['Address'].to_s,
     cuisine: row['Cuisine'].to_s,
     description: row['Description'].to_s,
-    user: user2
+    user: owners[rand(owners.count)]
   )
   photo = URI.open(row['Photo'].to_s)
-  restaurant.photo.attach(io: photo, filename: "#{row['Name']}.jpg", content_type: "image/jpg")
-  pp restaurant
+  restaurant.photo.attach(io: photo, filename: "#{row[0]}.jpg", content_type: "image/jpg")
+  restaurant.save
   puts "Created #{restaurant.name}"
 end
 

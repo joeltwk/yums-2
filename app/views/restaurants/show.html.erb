@@ -52,35 +52,39 @@
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 
       <div class="review-container">
-        <div class="review"><h3><b>Reviews</b></h3>
-          <% if @reviews.count < 1 %>
-            <p>No reviews yet</p>
-          <% else %>
-            <% @reviews.each do |review| %>
-              <div class="reviewer">
-                <% user = review.user %>
-                <%= link_to user_path(user), :action => 'go' do %>
-                <div class="review-avatar">
-                  <div class="profile-image" data-action="click->add-profile-image#show">
-                    <% if user.photo.attached? %>
-                      <%= cl_image_tag user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, :class => 'review-profile-pic' %>
-                      <% else %>
-                      <div class='review-no-profile'>
-                      <i class="fa-solid fa-user"></i>
-                      </div>
-                    <% end %>
+        <% if user_signed_in? %>
+          <div class="review"><h3><b>Reviews</b></h3>
+            <% if @reviews.count < 1 %>
+              <p>No reviews yet</p>
+            <% else %>
+              <% @reviews.each do |review| %>
+                <div class="reviewer">
+                  <% user = review.user %>
+                  <%= link_to user_path(user), :action => 'go' do %>
+                  <div class="review-avatar">
+                    <div class="profile-image" data-action="click->add-profile-image#show">
+                      <% if user.photo.attached? %>
+                        <%= cl_image_tag user.photo.key, width: 50, height: 50, crop: :thumb, gravity: :face, :class => 'review-profile-pic' %>
+                        <% else %>
+                        <div class='review-no-profile'>
+                        <i class="fa-solid fa-user"></i>
+                        </div>
+                      <% end %>
+                    </div>
+                    <p><%= review.user.name %></p>
                   </div>
-                  <p><%= review.user.name %></p>
+                  <% end %>
+                  <div class="description">
+                    <p><b>Rating: </b><%= review.rating %>
+                    <br><%= review.comment %></p>
+                  </div>
                 </div>
-                <% end %>
-                <div class="description">
-                  <p><b>Rating: </b><%= review.rating %>
-                  <br><%= review.comment %></p>
-                </div>
-              </div>
+              <% end %>
             <% end %>
+          </div>
+          <% else %>
+            <span><p><%= link_to "Sign in", new_user_session_path %> to view reviews.</p></span>
           <% end %>
-        </div>
       </div>
       <div class="restaurant-edit">
         <% if user_signed_in? && current_user.role == 'owner' %>
@@ -89,7 +93,7 @@
             restaurant_path(@restaurant),
             data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
           %></p>
-        <% else %>
+        <% elsif user_signed_in? %>
           <button type="button" class="follow-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Add a review
           </button>

@@ -18,3 +18,6 @@ application.register("map", MapController)
 
 import StarRatingController from "./star_rating_controller"
 application.register("star-rating", StarRatingController)
+
+import TabsController from "./tabs_controller"
+application.register("tabs", TabsController)
