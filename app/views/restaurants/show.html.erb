@@ -84,7 +84,7 @@
             restaurant_path(@restaurant),
             data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
           %></p>
-        <% else %>
+        <% elsif user_signed_in? %>
           <button type="button" class="follow-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
             Add a review
           </button>

@@ -24,11 +24,13 @@
       <%= link_to follower.name, user_path(follower), :class => 'follow-name' %>
     </div>
     <div>
-      <% if current_user.followee_relationships.find_by(followee_id: follower.id) != nil %>
-      <% current_friend = Friend.find_by(follower_id: current_user.id, followee_id: follower.id) %>
-      <%= link_to 'Unfollow',
-                  friend_path(current_friend),
-                  data: {turbo_method: :delete}, :class => 'follow-unfollow-btn' %>
+      <% if user_signed_in? %>
+        <% if current_user.followee_relationships.find_by(followee_id: follower.id) != nil %>
+        <% current_friend = Friend.find_by(follower_id: current_user.id, followee_id: follower.id) %>
+        <%= link_to 'Unfollow',
+                    friend_path(current_friend),
+                    data: {turbo_method: :delete}, :class => 'follow-unfollow-btn' %>
+        <% end %>
       <% end %>
     </div>
   </div>
