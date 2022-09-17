@@ -45,6 +45,7 @@ CSV.foreach(filepath, headers: :first_row) do |row|
   )
   photo = URI.open(row['Photo'].to_s)
   restaurant.photo.attach(io: photo, filename: "#{row['Name']}.jpg", content_type: "image/jpg")
+  pp restaurant
   puts "Created #{restaurant.name}"
 end
 
