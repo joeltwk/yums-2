@@ -6,6 +6,7 @@ class PagesController < ApplicationController
     # @restaurant = []
     # CollectionResetJob.set(wait: 10.second).perform_later(current_user)
     @favourite = Favourite.new
+    @title = "Recommendations"
   end
 
   private

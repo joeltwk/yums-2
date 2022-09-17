@@ -4,6 +4,8 @@ class ReviewsController < ApplicationController
 
   def show
     # @restaurant = Restaurant.find(params[:id])
+    @title = "User Profile"
+    @tab = 5
     @reviews = Review.all
     @following = Friend.where(follower_id: @user.id)
     @followers = Friend.where(followee_id: @user.id)
