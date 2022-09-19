@@ -22,6 +22,15 @@ class RestaurantsController < ApplicationController
       @avg_rating = "No ratings yet"
     end
     @review = Review.new
+        # The `geocoded` scope filters only flats with coordinates
+
+    @markers =
+      [{
+        lat: @restaurant.latitude,
+        lng: @restaurant.longitude,
+        info_window: render_to_string(partial: "info_window", locals: { restaurant: @restaurant })
+      }]
+
   end
 
   def index
