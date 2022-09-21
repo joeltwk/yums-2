@@ -1,20 +1,22 @@
 
-<%= form_with url: search_path, method: :get, class: "d-flex" do %>
+<%= form_with url: search_path, method: :get, class: "d-flex follow-search-bar" do %>
   <%= text_field_tag :query,
     params[:query],
     class: "form-control",
-    placeholder: "Find a restaurant"
+    placeholder: "Find a restaurant or user"
   %>
-  <%= submit_tag "Search", class: "btn btn-primary" %>
+  <%= button_tag(type: 'submit', class:"follow-search-btn") do %>
+    <i class="fa-solid fa-magnifying-glass"></i>
+  <% end %>
 <% end %>
 
 <% if @users.nil? && @restaurants.nil? %>
-  <div data-controller="tabs" data-tabs-default-tab-value="top">
+  <div data-controller="tabs" data-tabs-default-tab-value="top" class="tabbtn">
 <% else %>
   <% if @restaurants.nil? || @restaurants.empty? %>
-    <div data-controller="tabs" data-tabs-default-tab-value="user">
+    <div data-controller="tabs" data-tabs-default-tab-value="user" class="tabbtn">
   <% else %>
-    <div data-controller="tabs" data-tabs-default-tab-value="restaurant">
+    <div data-controller="tabs" data-tabs-default-tab-value="restaurant" class="tabbtn">
   <% end %>
 <% end %>
   <button id="top" data-tabs-target="btn" data-action="click->tabs#select">Top</button>
