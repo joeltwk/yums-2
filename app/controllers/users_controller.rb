@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     @friend = Friend.new
     @following = Friend.where(follower_id: @user.id)
     @followers = Friend.where(followee_id: @user.id)
+    @favourites = Favourite.where(user_id: @user)
     if user_signed_in?
       @current_user_friends = Friend.where(follower_id: current_user.id)
       @current_user_friends_users = []

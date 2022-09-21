@@ -19,5 +19,9 @@ application.register("map", MapController)
 import StarRatingController from "./star_rating_controller"
 application.register("star-rating", StarRatingController)
 
+import SwiperController from "./swiper_controller"
+application.register("swiper", SwiperController)
+
 import TabsController from "./tabs_controller"
 application.register("tabs", TabsController)
+
