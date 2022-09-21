@@ -23,7 +23,7 @@
   <button id="restaurant" data-tabs-target="btn" data-action="click->tabs#select">Restaurants</button>
   <button id="user" data-tabs-target="btn" data-action="click->tabs#select">Users</button>
   <div data-tabs-target="tab" id="top">
-    <div class="card-category">
+    <div class="search-container">
       <div class="content">
         <% @reviews.each do |r| %>
           <div class="cards">
@@ -40,7 +40,7 @@
   </div>
 
   <div data-tabs-target="tab" id="restaurant">
-    <div class="card-category">
+    <div class="search-container">
       <div class="content">
         <% if @restaurants.nil? || @restaurants.empty? %>
           <h6>There are no restaurants with that name.</h6>
@@ -61,29 +61,25 @@
   </div>
 
   <div data-tabs-target="tab" id="user">
-    <div class="card-category">
-      <div class="content">
+    <% if @users.nil? || @users.empty? %>
+      <h6>There are no Users with that name.</h6>
+    <% else %>
+      <% @users.each do |r| %>
         <div class="follow-profile-container">
           <div class="follow-profile">
-            <% if @users.nil? || @users.empty? %>
-              <h6>There are no Users with that name.</h6>
-            <% else %>
-              <% @users.each do |r| %>
-                <div class="follow-profile-pic">
-                  <% if r.photo.attached? %>
-                    <%= cl_image_tag r.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, :class => 'follow-profile-pic' %>
-                  <% else %>
-                    <div class='follow-no-profile'>
-                    <i class="fa-solid fa-user"></i>
-                    </div>
-                  <% end %>
+            <div class="follow-profile-pic">
+              <% if r.photo.attached? %>
+                <%= cl_image_tag r.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, :class => 'follow-profile-pic' %>
+              <% else %>
+                <div class='follow-no-profile'>
+                <i class="fa-solid fa-user"></i>
                 </div>
-                  <%= link_to r.name, user_path(r) %>
               <% end %>
-            <% end %>
+            </div>
+              <%= link_to r.name, user_path(r), :class => 'follow-name' %>
           </div>
         </div>
-      </div>
-    </div>
+      <% end %>
+    <% end %>
   </div>
 </div>
