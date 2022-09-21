@@ -8,11 +8,19 @@
   <%= submit_tag "Search", class: "btn btn-primary" %>
 <% end %>
 
-<div data-controller="tabs" data-tabs-default-tab-value="two">
-  <button id="one" data-tabs-target="btn" data-action="click->tabs#select">Top</button>
-  <button id="two" data-tabs-target="btn" data-action="click->tabs#select">Restaurants</button>
-  <button id="abc" data-tabs-target="btn" data-action="click->tabs#select">Users</button>
-  <div data-tabs-target="tab" id="one">
+<% if @users.nil? && @restaurants.nil? %>
+  <div data-controller="tabs" data-tabs-default-tab-value="top">
+<% else %>
+  <% if @restaurants.nil? || @restaurants.empty? %>
+    <div data-controller="tabs" data-tabs-default-tab-value="user">
+  <% else %>
+    <div data-controller="tabs" data-tabs-default-tab-value="restaurant">
+  <% end %>
+<% end %>
+  <button id="top" data-tabs-target="btn" data-action="click->tabs#select">Top</button>
+  <button id="restaurant" data-tabs-target="btn" data-action="click->tabs#select">Restaurants</button>
+  <button id="user" data-tabs-target="btn" data-action="click->tabs#select">Users</button>
+  <div data-tabs-target="tab" id="top">
     <div class="card-category">
       <div class="content">
         <% @reviews.each do |r| %>
@@ -29,7 +37,7 @@
     </div>
   </div>
 
-  <div data-tabs-target="tab" id="two">
+  <div data-tabs-target="tab" id="restaurant">
     <div class="card-category">
       <div class="content">
         <% if @restaurants.nil? || @restaurants.empty? %>
@@ -50,23 +58,29 @@
     </div>
   </div>
 
-  <div data-tabs-target="tab" id="abc">
+  <div data-tabs-target="tab" id="user">
     <div class="card-category">
       <div class="content">
-        <% if @users.nil? || @users.empty? %>
-          <h6>There are no Users with that name.</h6>
-        <% else %>
-          <% @users.each do |r| %>
-            <div class="cards">
-              <h6><%= link_to r.name, user_path(r) %></h6>
-              <% if r.photo.attached? %>
-                <%= cl_image_tag r.photo.key, :class => "image-show" %>
-              <% else %>
-                <img src="https://res.cloudinary.com/dswoabunp/image/upload/v1659754023/samples/food/dessert.jpg"/>
+        <div class="follow-profile-container">
+          <div class="follow-profile">
+            <% if @users.nil? || @users.empty? %>
+              <h6>There are no Users with that name.</h6>
+            <% else %>
+              <% @users.each do |r| %>
+                <div class="follow-profile-pic">
+                  <% if r.photo.attached? %>
+                    <%= cl_image_tag r.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, :class => 'follow-profile-pic' %>
+                  <% else %>
+                    <div class='follow-no-profile'>
+                    <i class="fa-solid fa-user"></i>
+                    </div>
+                  <% end %>
+                </div>
+                  <%= link_to r.name, user_path(r) %>
               <% end %>
-            </div>
-          <% end %>
-        <% end %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
