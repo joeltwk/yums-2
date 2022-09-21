@@ -8,6 +8,17 @@ class PagesController < ApplicationController
       @collection = Collection.where(user: current_user).limit(current_user.view_count)
     end
     @favourite = Favourite.new
+    @title = "Recommendations"
+  end
+
+  def search
+    @title = "Search"
+    if params[:query].present?
+      @restaurants = Restaurant.global_search(params[:query])
+      @users = User.global_search(params[:query])
+    end
+
+    @reviews = Review.order(rating: :desc)
   end
 
   private

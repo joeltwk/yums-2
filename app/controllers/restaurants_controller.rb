@@ -2,6 +2,7 @@ class RestaurantsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit, :update, :destroy]
 
   def show
+    @title = "Restaurant Details"
     @restaurant = Restaurant.find(params[:id])
     @reviews = Review.where(restaurant_id: @restaurant)
     if user_signed_in?
@@ -21,9 +22,20 @@ class RestaurantsController < ApplicationController
       @avg_rating = "No ratings yet"
     end
     @review = Review.new
+        # The `geocoded` scope filters only flats with coordinates
+
+    @markers =
+      [{
+        lat: @restaurant.latitude,
+        lng: @restaurant.longitude,
+        info_window: render_to_string(partial: "info_window", locals: { restaurant: @restaurant })
+      }]
+
   end
 
   def index
+    @title = "All Restaurants"
+    @tab = 1
     @restaurants = Restaurant.all
   end
 

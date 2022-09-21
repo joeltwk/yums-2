@@ -1,10 +1,9 @@
 <%= simple_form_for [@restaurant, @favourite] do |f| %>
-  <%= f.input :restaurant_id, input_html: { value: params[:id] }, as: :hidden  %>
-  <%= f.input :user_id, input_html: { value: current_user.id }, as: :hidden  %>
+    <%= f.input :restaurant_id, input_html: { value: params[:id] }, as: :hidden  %>
+    <%= f.input :user_id, input_html: { value: current_user.id }, as: :hidden  %>
   <div class="form-actions">
     <%= button_tag(type: 'submit', class:"fav-button") do %>
       <i class="fa-regular fa-heart"></i>
     <% end %>
-    Add to Favourites
   </div>
 <% end %>

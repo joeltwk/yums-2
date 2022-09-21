@@ -1,3 +1,19 @@
+.fav-button {
+  border: 0px;
+  background-color: #f4f4f4;
+  padding: 0px;
+  font-size: 24px;
+}
+
+.bookmark {
+  height: 24px;
+}
+
+.delete-button a {
+  color:#de0505;
+  font-size: 24px;
+}
+
 .card-category {
   box-shadow: 0 0 15px rgba(42, 38, 38, 0.1);
   border-radius: 5px;
@@ -10,13 +26,14 @@
 }
 
 h1 {
-  border-bottom: 0.2px solid rgb(72, 65, 65);
-  text-align: center;
-  letter-spacing: 0.5px;
+  text-align: left;
+  font-size: 24px;
+  font-weight: 600;
 }
 
 h3 {
   text-align: center;
+  font-size: 16px;
   letter-spacing: 0.5px;
   border-bottom: 0.2px solid rgb(72, 65, 65);
 }
@@ -28,6 +45,8 @@ h6 {
 
 p {
   color: rgb(72, 65, 65);
+  word-break: break-all;
+  font-size: 13px;
 }
 
 #restaurant-title {
@@ -49,7 +68,6 @@ p {
   width: 60px;
   text-align: center;
   font-size: 12px;
-  // border: 0.2px solid rgb(72, 65, 65);
   margin-right: 5px;
 }
 
@@ -112,4 +130,15 @@ a:hover {
 
 .restaurant-infos p {
   font-size: small;
+}
+
+.review-container p {
+  font-size: 18px;
+  text-align: center;
+}
+
+.review-container a {
+  font-size: 18px;
+  text-decoration: underline;
+  font-weight: 600;
 }

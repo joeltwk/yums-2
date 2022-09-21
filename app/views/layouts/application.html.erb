@@ -12,6 +12,7 @@
     </head>
 
   <body>
+    <%= render "shared/topnav" %>
     <%= render "shared/navbar" %>
     <%# flash messages %>
     <p class="notice"><%= notice %></p>
@@ -22,4 +23,8 @@
     </div>
     <%# <script src="https://hammerjs.github.io/dist/hammer.js"></script> %>
   </body>
+
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js"></script>
+
 </html>

@@ -31,6 +31,8 @@ class FavouritesController < ApplicationController
   end
 
   def index
+    @tab = 4
+    @title = "My Favourites"
     @favourites = Favourite.where(user_id: current_user.id)
   end
 
