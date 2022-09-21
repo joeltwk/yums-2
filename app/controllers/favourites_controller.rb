@@ -34,7 +34,8 @@ class FavouritesController < ApplicationController
   def index
     @tab = 4
     @title = "My Favourites"
-    @favourites = Favourite.where(user_id: current_user.id)
+    @user = User.find(params[:user_id])
+    @favourites = Favourite.where(user_id: @user)
   end
 
   def destroy
