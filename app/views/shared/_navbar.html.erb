@@ -39,30 +39,48 @@
 
     <% elsif user_signed_in? %>
       <%# All Restaurants Link %>
+      <div class="nav-item d-flex flex-column justify-content-center align-items-center">
       <% if @tab == 1 %>
-        <div class="nav-item d-flex flex-column justify-content-center align-items-center active-tab">
-      <% else %>
-        <div class="nav-item d-flex flex-column justify-content-center align-items-center">
-      <% end %>
         <%= link_to restaurants_path do %>
-          <div class="nav-item-icon flex-grow-1">
+            <div class="nav-item-icon flex-grow-1 active-tab">
+              <i class="fa-solid fa-utensils"></i>
+            </div>
+            <div class="nav-item-text mb-1 active-tab">
+              All
+            </div>
+          <% end %>
+      <% else %>
+        <%= link_to restaurants_path do %>
+          <div class="nav-item-icon flex-grow-1 inactive-tab">
             <i class="fa-solid fa-utensils"></i>
           </div>
-          <div class="nav-item-text mb-1">
+          <div class="nav-item-text mb-1 inactive-tab">
             All
           </div>
         <% end %>
+      <% end %>
       </div>
       <%# Search Link %>
       <div class="nav-item d-flex flex-column justify-content-center align-items-center">
+      <% if @tab == 2 %>
         <%= link_to search_path do %>
-          <div class="nav-item-icon flex-grow-1">
+          <div class="nav-item-icon flex-grow-1 active-tab">
             <i class="fa-solid fa-magnifying-glass"></i>
           </div>
-          <div class="nav-item-text mb-1">
+          <div class="nav-item-text mb-1 active-tab">
             Search
           </div>
         <% end %>
+      <% else %>
+        <%= link_to search_path do %>
+          <div class="nav-item-icon flex-grow-1 inactive-tab">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </div>
+          <div class="nav-item-text mb-1 inactive-tab">
+            Search
+          </div>
+        <% end %>
+      <% end %>
       </div>
       <%# Home Link %>
       <div class="nav-item d-flex flex-column justify-content-center align-items-center">
@@ -73,34 +91,48 @@
         <% end %>
       </div>
       <%# Favourites Link %>
+      <div class="nav-item d-flex flex-column justify-content-center align-items-center">
       <% if @tab == 4 %>
-        <div class="nav-item d-flex flex-column justify-content-center align-items-center active-tab">
-      <% else %>
-        <div class="nav-item d-flex flex-column justify-content-center align-items-center">
-      <% end %>
         <%= link_to user_favourites_path(current_user) do %>
-        <div class="nav-item-icon flex-grow-1">
-          <i class="fa-solid fa-heart"></i>
-        </div>
-        <div class="nav-item-text mb-1">
-          Faves
-        </div>
+          <div class="nav-item-icon flex-grow-1 active-tab">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+          <div class="nav-item-text mb-1 active-tab">
+            Faves
+          </div>
         <% end %>
+      <% else %>
+        <%= link_to user_favourites_path(current_user) do %>
+          <div class="nav-item-icon flex-grow-1 inactive-tab">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+          <div class="nav-item-text mb-1 inactive-tab">
+            Faves
+          </div>
+          <% end %>
+      <% end %>
       </div>
       <%# Profile Link %>
+      <div class="nav-item d-flex flex-column justify-content-center align-items-center">
       <% if @tab == 5 %>
-        <div class="nav-item d-flex flex-column justify-content-center align-items-center active-tab">
-      <% else %>
-        <div class="nav-item d-flex flex-column justify-content-center align-items-center">
-      <% end %>
         <%= link_to user_path(current_user) do %>
-          <div class="nav-item-icon flex-grow-1">
+          <div class="nav-item-icon flex-grow-1 active-tab">
             <i class="fa-solid fa-user" id="nav-user"></i>
           </div>
-          <div class="nav-item-text mb-1">
+          <div class="nav-item-text mb-1 active-tab">
             Profile
           </div>
         <% end %>
+      <% else %>
+        <%= link_to user_path(current_user) do %>
+          <div class="nav-item-icon flex-grow-1 inactive-tab">
+            <i class="fa-solid fa-user inactive-tab" id="nav-user"></i>
+          </div>
+          <div class="nav-item-text mb-1 inactive-tab">
+            Profile
+          </div>
+        <% end %>
+      <% end %>
       </div>
 
       <% else %>
