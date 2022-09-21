@@ -2,9 +2,11 @@ class PagesController < ApplicationController
   before_action :user_login?, only: [:home]
 
   def home
-    @restaurants = Collection.where(user: current_user)
-    # @restaurant = []
-    # CollectionResetJob.set(wait: 10.second).perform_later(current_user)
+    if current_user.view_count.nil?
+      @collection = Collection.where(user: current_user).limit(5)
+    else
+      @collection = Collection.where(user: current_user).limit(current_user.view_count)
+    end
     @favourite = Favourite.new
   end
 

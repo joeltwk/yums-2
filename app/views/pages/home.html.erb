@@ -1,97 +1,20 @@
 <div class="header">
   <h1>Check this out...</h1>
 </div>
-
-<div class="card-container">
-  <% if current_user.view_count == 5 %>
-    <% if current_user.role === "owner" %>
-    <% else %>
-      <div id="next-restaurant">
-        <div class="card">
-          <p>Sorry, you have ran out of restaurants to view.</p>
-          <p>Click <%= link_to "here", user_favourites_path(current_user) %> to view your favourites!</p>
-        </div>
-      </div>
-    <% end %>
-  <% else %>
-    <% @restaurants.each do |r| %>
-        <div id="next-restaurant">
-          <div class="card">
-            <div data-bs-toggle="modal" data-bs-target="#exampleModal">
-              <% if r.restaurant.photo.attached? %>
-                <%= cl_image_tag r.restaurant.photo.key, :class => "image-show" %>
-              <% else %>
-                <img src="https://res.cloudinary.com/dswoabunp/image/upload/v1659754023/samples/food/dessert.jpg"/>
-              <% end %>
-              <div class="card-body">
-                <h6><%= r.restaurant.name %></h6>
-                <p><%= r.restaurant.description %></p>
-              </div>
-            </div>
-            <div class="choice">
-              <%= simple_form_for [r.restaurant, @favourite] do |f| %>
-                <%= f.input :restaurant_id, input_html: { value: r.restaurant }, as: :hidden  %>
-                <%= f.input :user_id, input_html: { value: current_user.id }, as: :hidden  %>
-                <%= f.input :location, input_html: { value: "home" }, as: :hidden  %>
-                  <%= button_tag(type: 'submit', class:"fav-button") do %>
-                    <i class="fa-solid fa-heart home-heart"></i>
-                  <% end %>
-              <% end %>
-              <%= link_to icon("fa", "play"),
-                collection_path(r),
-                data: {turbo_method: :delete}
-              %>
-            </div>
-          </div>
-          <%# restaurant pop up %>
-          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title" id="exampleModalLabel"><%= r.restaurant.name %></h4>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                  <div class="home-restaurant-details">
-                    <h6>Rating:</h6>
-                        <% ratings = [] %>
-
-                        <% r.restaurant.reviews.each do |review| %>
-                          <% ratings << review.rating %>
-                        <% end %>
-
-                        <% if ratings.count.positive? %>
-                          <% avg_rating = (ratings.sum / ratings.count).round(1) %>
-                          <div class="home-rating-details">
-                            <p class="home-rating"><%= avg_rating %></p>
-                            <div class="flex gap-x-3 mb-4 home-stars">
-                                <% Review::MAX_RATING.times do |n| %>
-                                  <%= inline_svg_tag("star.svg",
-                                    class: "review-star w-8 h-8 #{star_rating_class(avg_rating, n)}") %>
-                                <% end %>
-                            </div>
-                          </div>
-                        <% else %>
-                          <p class="home-modal-details"><%= "No ratings yet" %></p>
-                        <% end %>
-                    <h6>Cuisine:</h6>
-                    <p class="home-modal-details"><%= r.restaurant.cuisine %></p>
-                    <h6>Description: </h6>
-                    <p class="home-modal-details"><%= r.restaurant.description %></p>
-                    <h6>Location: </h6>
-                    <p class="home-modal-details"><%= r.restaurant.address %></p>
-                  </div>
-                  <%= link_to 'View More', restaurant_path(r.restaurant), :class => 'home-view-btn' %>
-                </div>
-                <%# <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Save changes</button>
-                </div> %>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% break %>
-    <% end %>
+<div id="board" data-controller="swiper" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <% @collection.each do |collection| %>
+    <%= render 'restaurants/restaurant_card', restaurant: collection.restaurant %>
   <% end %>
 </div>
+<div class="out-of-swipes">
+  <%= image_tag("home.png", :alt => "", size: "320x320") %>
+</div>
+
+<div class="swipe-graphic">
+  <%= image_tag("swipe.png", :alt => "", size: "300x86") %>
+</div>
+
+
+  <%# <% @collection.reverse.each do |collection| %>
+    <%# <%= render 'restaurants/restaurant_popup', restaurant: collection.restaurant %>
+  <%# <% end %>

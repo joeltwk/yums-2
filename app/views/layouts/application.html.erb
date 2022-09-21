@@ -5,9 +5,11 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
-  </head>
+    </head>
 
   <body>
     <%= render "shared/navbar" %>
@@ -18,5 +20,6 @@
     <div class="container">
       <%= yield %>
     </div>
+    <%# <script src="https://hammerjs.github.io/dist/hammer.js"></script> %>
   </body>
 </html>
