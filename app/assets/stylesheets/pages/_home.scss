@@ -71,6 +71,7 @@
 
 .card {
   width: 320px;
+  height: 470px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -86,6 +87,8 @@
 }
 
 .card-image {
+  width: 320px;
+  height: 320px;
   object-fit: cover;
 }
 
