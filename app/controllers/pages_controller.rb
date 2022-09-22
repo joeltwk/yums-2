@@ -15,10 +15,11 @@ class PagesController < ApplicationController
     @title = "Search"
     if params[:query].present?
       @restaurants = Restaurant.global_search(params[:query])
+      @reviews = Review.where(restaurant: @restaurants).order(rating: :desc) unless @restaurants.nil?
       @users = User.global_search(params[:query])
+    else
+      @reviews = Review.order(rating: :desc)
     end
-
-    @reviews = Review.order(rating: :desc)
   end
 
   private
