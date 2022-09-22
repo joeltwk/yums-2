@@ -4,7 +4,6 @@ import { Controller } from "@hotwired/stimulus"
 class Carousel {
 
   constructor(element) {
-      console.log("carousel constructor trigger")
       this.board = element
       // add first two cards programmatically
       // this.push()
@@ -24,6 +23,14 @@ class Carousel {
 
       // get next card
       this.nextCard = this.cards[this.cards.length - 2]
+
+      // get icons
+      this.heart = this.board.querySelector('.heart-icon')
+      this.cross = this.board.querySelector('.x-icon')
+
+      // set icon scale
+      this.heart.style.transform = 'translateX(-50%) translateY(-50%) rotate(0deg) rotateY(0deg) scale(0)'
+      this.cross.style.transform = 'translateX(-220%) translateY(-50%) rotate(0deg) rotateY(0deg) scale(0)'
 
       // if at least one card is present
       if (this.cards.length > 0) {
@@ -130,6 +137,9 @@ class Carousel {
       // get scale ratio, between .95 and 1
       let scale = (95 + (5 * Math.abs(propX))) / 100
 
+      // get icon scale ratio
+      let iconScale = (0 + (300 * Math.abs(propX))) / 100
+
       // move and rotate top card
       this.topCard.style.transform =
           'translateX(' + posX + 'px) translateY(' + posY + 'px) rotate(' + deg + 'deg) rotateY(0deg) scale(1)'
@@ -137,6 +147,21 @@ class Carousel {
       // scale up next card
       if (this.nextCard) this.nextCard.style.transform =
           'translateX(-50%) translateY(-50%) rotate(0deg) rotateY(0deg) scale(' + scale + ')'
+
+      //scale up heart
+      if (propX > 0.05 && e.direction == Hammer.DIRECTION_RIGHT) {
+          this.heart.style.transform = 'translateX(-50%) translateY(-50%) rotate(0deg) rotateY(0deg) scale(' + iconScale + ')'
+        } else if (propX < 0.05 ){
+          this.heart.style.transition = 'transform 200ms linear'
+          this.heart.style.transform = 'translateX(-50%) translateY(-50%) rotate(0deg) rotateY(0deg) scale(0)'
+        }
+      //scale up cross
+      if (propX < 0.05 && e.direction == Hammer.DIRECTION_LEFT) {
+        this.cross.style.transform = 'translateX(-220%) translateY(-50%) rotate(0deg) rotateY(0deg) scale(' + iconScale + ')'
+      } else if (propX > 0.05){
+        this.cross.style.transition = 'transform 200ms linear'
+        this.cross.style.transform = 'translateX(-220%) translateY(-50%) rotate(0deg) rotateY(0deg) scale(0)'
+      }
 
       if (e.isFinal) {
 
@@ -147,6 +172,10 @@ class Carousel {
           // set back transition properties
           this.topCard.style.transition = 'transform 200ms ease-out'
           if (this.nextCard) this.nextCard.style.transition = 'transform 100ms linear'
+          this.heart.style.transform = 'translateX(-50%) translateY(-50%) rotate(0deg) rotateY(0deg) scale(0)'
+          this.heart.style.transition = 'transform 100ms linear'
+          this.cross.style.transform = 'translateX(-220%) translateY(-50%) rotate(0deg) rotateY(0deg) scale(0)'
+          this.cross.style.transition = 'transform 100ms linear'
 
           // check threshold and movement direction
           if (propX > 0.25 && e.direction == Hammer.DIRECTION_RIGHT) {
@@ -154,8 +183,9 @@ class Carousel {
               successful = true
               // get right border position
               posX = this.board.clientWidth
-              // get id of restaurant
-
+              // reset icon
+              this.heart.style.transform = 'translateX(-50%) translateY(-50%) rotate(0deg) rotateY(0deg) scale(0)'
+              //add to fave
               this.topCard.querySelector(".collection-fave-btn").click()
 
 
@@ -165,7 +195,10 @@ class Carousel {
               // get left border position
               posX = -(this.board.clientWidth + this.topCard.clientWidth)
 
-              console.log(this.topCard.querySelector(".collection-del-btn"))
+              //reset icon
+              this.cross.style.transform = 'translateX(-220%) translateY(-50%) rotate(0deg) rotateY(0deg) scale(0)'
+
+              //delete from collection
               this.topCard.querySelector(".collection-del-btn").click()
 
           }
