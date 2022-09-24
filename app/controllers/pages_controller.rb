@@ -13,6 +13,7 @@ class PagesController < ApplicationController
 
   def search
     @title = "Search"
+    @tab = 2
     if params[:query].present?
       @restaurants = Restaurant.global_search(params[:query])
       @reviews = Review.where(restaurant: @restaurants).order(rating: :desc) unless @restaurants.nil?

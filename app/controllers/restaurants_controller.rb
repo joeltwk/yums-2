@@ -40,6 +40,8 @@ class RestaurantsController < ApplicationController
   end
 
   def new
+    @tab = 2
+    @title = "Add a Restaurant"
     @restaurant = Restaurant.new
   end
 
