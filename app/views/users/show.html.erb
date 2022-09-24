@@ -32,35 +32,37 @@
         </div>
       <% end %>
 
-      <div class="follow-btns mb-3">
-        <% if user_signed_in? && current_user.id != @user.id %>
-          <% if @current_user_friends_users.include?(@user.id) %>
-              <%= link_to 'Following',
-                  friend_path(@current_friend),
-                  data: {turbo_method: :delete}, :class => 'unfollow-btn'%>
-            <% else %>
-              <%= simple_form_for [@user, @friend] do |f| %>
-              <%= f.submit 'Follow', :class => 'follow-btn' %>
+      <% if current_user.role == "regular" %>
+        <div class="follow-btns mb-3">
+          <% if user_signed_in? && current_user.id != @user.id %>
+            <% if @current_user_friends_users.include?(@user.id) %>
+                <%= link_to 'Following',
+                    friend_path(@current_friend),
+                    data: {turbo_method: :delete}, :class => 'unfollow-btn'%>
+              <% else %>
+                <%= simple_form_for [@user, @friend] do |f| %>
+                <%= f.submit 'Follow', :class => 'follow-btn' %>
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
-      </div>
+        </div>
 
-      <div class="follow-container">
-        <div class="follow-info">
-          <h3 class="follow-title">Following</h3>
-          <div class="follow-count">
-            <%= link_to @following.count, user_friends_path(@user), :class => 'follow-count-text' %>
+        <div class="follow-container">
+          <div class="follow-info">
+            <h3 class="follow-title">Following</h3>
+            <div class="follow-count">
+              <%= link_to @following.count, user_friends_path(@user), :class => 'follow-count-text' %>
+            </div>
           </div>
-        </div>
-        <div class="follow-info">
-          <h3 class="follow-title">Followers</h3>
-          <div class="follow-count">
-            <%= link_to @followers.count, user_followers_path(@user), :class => 'follow-count-text' %>
+          <div class="follow-info">
+            <h3 class="follow-title">Followers</h3>
+            <div class="follow-count">
+              <%= link_to @followers.count, user_followers_path(@user), :class => 'follow-count-text' %>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    <% end %>
 
     <%# profile image form %>
     <% if user_signed_in? && @user == current_user %>
@@ -75,13 +77,6 @@
 </div>
 
 <div class="profile-info">
-    <div class="role-btn">
-      <% if @user == current_user && @user.role == "owner" %>
-        <%= link_to "My Restaurants", user_restaurants_path(current_user.id), :class => 'unfollow-btn' %>
-      <% elsif @user == current_user %>
-        <%# link_to "My Reviews", review_path, :class => 'unfollow-btn' %>
-      <% end %>
-    </div>
     <% if @user.role == "regular" %>
       <div class="favourites">
         <h3>Favourites</h3>
@@ -97,6 +92,25 @@
                   </div>
                 <% end %>
                 <p id="test"><%= link_to restaurant.name, restaurant_path(restaurant.id) %></p>
+              </div>
+            <% end %>
+          </div>
+      </div>
+    <% elsif @user.role == "owner" %>
+      <div class="restaurants">
+        <h3>Restaurants</h3>
+          <div class="fav-container">
+            <% @restaurants.each do |restaurant| %>
+              <div class="container-colour">
+                <% rest = Restaurant.find_by(id: restaurant.id) %>
+                <% if rest.photo.attached? %>
+                  <%= cl_image_tag rest.photo.key, :class => "image-show-container" %>
+                <% else %>
+                  <div class="no-image">
+                    <h2>No Image</h2>
+                  </div>
+                <% end %>
+                <p id="test"><%= link_to rest.name, restaurant_path(rest.id) %></p>
               </div>
             <% end %>
           </div>
