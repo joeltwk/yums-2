@@ -35,6 +35,8 @@ class RestaurantsController < ApplicationController
   end
 
   def restaurants
+    @tab = 1
+    @title = "My Restaurants"
     @restaurants = Restaurant.where(user_id: params[:user_id])
   end
 
