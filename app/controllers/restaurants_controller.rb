@@ -35,13 +35,16 @@ class RestaurantsController < ApplicationController
     @title = "All Restaurants"
     @tab = 1
     @restaurants = Restaurant.all
-    @ratings = []
+    @rest_rating = {}
+
     @restaurants.each do |rest|
+      @ratings = []
       rest.reviews.each do |review|
         @ratings << review.rating
       end
       if @ratings.count.positive?
-        @avg_rating = (@ratings.sum / @ratings.count).round(1)
+        @avg_rating = @ratings.sum.fdiv(@ratings.count).round(1)
+        @rest_rating[rest.id]= @avg_rating
       else
         @avg_rating = "No ratings yet"
       end
@@ -54,13 +57,16 @@ class RestaurantsController < ApplicationController
 
   def restaurants
     @restaurants = Restaurant.where(user_id: params[:user_id])
-    @ratings = []
+    @rest_rating = {}
+
     @restaurants.each do |rest|
+      @ratings = []
       rest.reviews.each do |review|
         @ratings << review.rating
       end
       if @ratings.count.positive?
-        @avg_rating = (@ratings.sum / @ratings.count).round(1)
+        @avg_rating = @ratings.sum.fdiv(@ratings.count).round(1)
+        @rest_rating[rest.id]= @avg_rating
       else
         @avg_rating = "No ratings yet"
       end
