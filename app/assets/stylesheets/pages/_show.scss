@@ -15,14 +15,13 @@
 }
 
 .card-category {
-  box-shadow: 0 0 15px rgba(42, 38, 38, 0.1);
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 12px 12px;
 }
 
 .image-show {
   width: 100%;
-  border-radius: 2.5px;
+  border-radius: 5px;
 }
 
 h1 {
@@ -45,7 +44,6 @@ h6 {
 
 p {
   color: rgb(72, 65, 65);
-  word-break: break-all;
   font-size: 13px;
 }
 
@@ -82,11 +80,6 @@ p {
   text-align: center;
   padding: center;
   justify-content: center;
-}
-
-a {
-  color: rgb(72, 65, 65);
-  text-decoration: none;
 }
 
 a:hover {
