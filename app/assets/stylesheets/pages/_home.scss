@@ -26,13 +26,6 @@
   margin-right: 10px;
 }
 
-.card-container {
-  display: flex;
-  height: 70vh;
-  justify-content: center;
-  align-items: center;
-}
-
 .home-view-btn {
   margin-top: 15px;
   font-size: 0.8em;
@@ -66,4 +59,135 @@
 
 .home-modal-details {
   font-size: 0.8em;
+}
+
+// #board {
+//   width: 100%;
+//   height: 100%;
+//   // position: relative;
+//   // overflow: hidden;
+//   background-color: rgb(245,247,250);
+// }
+
+.card {
+  width: 320px;
+  height: 470px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 5%;
+  background-color: white;
+  box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.05);
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.card-name {
+  font-size: 1.5em;
+  margin-bottom: 0;
+}
+
+.card-image {
+  width: 320px;
+  height: 320px;
+  object-fit: cover;
+}
+
+.card-image .image-show {
+  border-top-right-radius: 5%;
+  border-top-left-radius: 5%;
+}
+
+.card-body {
+  margin: 0;
+}
+
+
+.card-rating {
+  display: flex;
+  align-items: center;
+}
+
+.card-rating .card-stars {
+  height: 25px;
+  padding-top: 0px;
+  margin-left: 5px;
+  margin-bottom: 0;
+}
+.card-rating .card-stars .review-star {
+  margin: 0px;
+}
+
+.card-rating p {
+  margin-left: 5px;
+  font-size: 1em;
+  margin-bottom: 7px;
+}
+
+.out-of-swipes {
+  width: 320px;
+  position: absolute;
+  z-index: -10;
+  top: 29%;
+  left: 8%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// .deck-container {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+// }
+
+// .cards {
+//     position: relative;
+// }
+
+.card-icon-container {
+  z-index: 10;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.heart-icon {
+  font-size: 6em;
+  color: rgb(213, 58, 37);
+  opacity: 0.85;
+}
+
+.x-icon {
+  font-size: 6em;
+  color: whitesmoke;
+  opacity: 0.85;
+}
+
+.card-icons {
+  margin-top: 10px;
+  display: flex;
+  width: 100%;
+  height: auto;
+  justify-content: space-between;
+}
+
+.fa-circle-xmark {
+  font-size: 3em;
+  color: rgb(213, 58, 37);
+
+}
+
+.heart-circle {
+  height: auto;
+  width: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #eda62b;
+}
+
+.card-heart {
+  font-size: 1.5em;
+  color: white;
 }

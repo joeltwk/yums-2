@@ -17,12 +17,11 @@ class FavouritesController < ApplicationController
       collection.destroy unless collection.nil?
       if params[:favourite][:location] == "home"
         if current_user.view_count.nil?
-          current_user.view_count = 1
+          current_user.view_count = 4
         else
-          current_user.view_count += 1
+          current_user.view_count -= 1
         end
         current_user.save
-        redirect_to root_path
       else
         redirect_to restaurant_path(@restaurant)
       end
@@ -34,7 +33,8 @@ class FavouritesController < ApplicationController
   def index
     @tab = 4
     @title = "My Favourites"
-    @favourites = Favourite.where(user_id: current_user.id)
+    @user = User.find(params[:user_id])
+    @favourites = Favourite.where(user_id: @user)
   end
 
   def destroy

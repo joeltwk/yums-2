@@ -1,42 +1,67 @@
 <div class="profile-container" data-controller="add-profile-image">
-  <div class="profile-top">
-    <% if user_signed_in? && current_user.id != @user.id %>
-      <div class="profile-image">
-        <% if @user.photo.attached? %>
-          <%= cl_image_tag @user.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, :class => 'profile-pic' %>
-          <% else %>
-          <div class='no-profile'>
-          <i class="fa-solid fa-user"></i>
+  <div class="profile-top d-flex flex-column">
+      <% if user_signed_in? && current_user.id != @user.id %>
+        <div class="profile-header d-flex flex-column">
+          <div class="profile-image">
+            <% if @user.photo.attached? %>
+              <%= cl_image_tag @user.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, :class => 'profile-pic' %>
+              <% else %>
+              <div class='no-profile'>
+              <i class="fa-solid fa-user"></i>
+              </div>
+            <% end %>
           </div>
-        <% end %>
-      </div>
-    <% else %>
-      <div class="profile-image" data-action="click->add-profile-image#show">
-        <% if @user.photo.attached? %>
-          <%= cl_image_tag @user.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, :class => 'profile-pic' %>
-          <% else %>
-          <div class='no-profile'>
-          <i class="fa-solid fa-user"></i>
+          <div class="mt-1">
+            <h3 class='username'><%= @user.name %></h3>
           </div>
-        <% end %>
-      </div>
-    <% end %>
-
-    <div class="follow-container">
-      <div class="follow-info">
-        <h3 class="follow-title">Follower</h3>
-        <div class="follow-count">
-        <%= link_to @followers.count, user_followers_path(@user), :class => 'follow-count-text' %>
         </div>
+      <% else %>
+        <div class="profile-header">
+          <div class="profile-image" data-action="click->add-profile-image#show">
+            <% if @user.photo.attached? %>
+              <%= cl_image_tag @user.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, :class => 'profile-pic' %>
+              <% else %>
+              <div class='no-profile'>
+              <i class="fa-solid fa-user"></i>
+              </div>
+            <% end %>
+          </div>
+          <div class="mt-1">
+            <h3 class='username'><%= @user.name %></h3>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="follow-btns mb-3">
+        <% if user_signed_in? && current_user.id != @user.id %>
+          <% if @current_user_friends_users.include?(@user.id) %>
+              <%= link_to 'Following',
+                  friend_path(@current_friend),
+                  data: {turbo_method: :delete}, :class => 'unfollow-btn'%>
+            <% else %>
+              <%= simple_form_for [@user, @friend] do |f| %>
+              <%= f.submit 'Follow', :class => 'follow-btn' %>
+            <% end %>
+          <% end %>
+        <% end %>
       </div>
-      <div class="follow-info">
-        <h3 class="follow-title">Following</h3>
-        <div class="follow-count">
-        <%= link_to @following.count, user_friends_path(@user), :class => 'follow-count-text' %>
+
+      <div class="follow-container">
+        <div class="follow-info">
+          <h3 class="follow-title">Following</h3>
+          <div class="follow-count">
+            <%= link_to @following.count, user_friends_path(@user), :class => 'follow-count-text' %>
+          </div>
+        </div>
+        <div class="follow-info">
+          <h3 class="follow-title">Followers</h3>
+          <div class="follow-count">
+            <%= link_to @followers.count, user_followers_path(@user), :class => 'follow-count-text' %>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+
     <%# profile image form %>
     <% if user_signed_in? && @user == current_user %>
       <div class="add-photo-form d-none" data-add-profile-image-target='form'>
@@ -50,33 +75,31 @@
 </div>
 
 <div class="profile-info">
-  <h3 class='username'><%= @user.name %></h3>
-  <h4 class='about'>About</h4>
-  <div class="follow-btn-container">
-    <div class="follow-btns">
-      <% if user_signed_in? && current_user.id != @user.id %>
-        <% if @current_user_friends_users.include?(@user.id) %>
-            <%= link_to 'Unfollow',
-                friend_path(@current_friend),
-                data: {turbo_method: :delete}, :class => 'unfollow-btn'%>
-          <% else %>
-            <%= simple_form_for [@user, @friend] do |f| %>
-            <%= f.submit 'Follow', :class => 'follow-btn' %>
-          <% end %>
-        <% end %>
-      <% end %>
-    </div>
     <div class="role-btn">
       <% if @user == current_user && @user.role == "owner" %>
         <%= link_to "My Restaurants", user_restaurants_path(current_user.id), :class => 'unfollow-btn' %>
       <% elsif @user == current_user %>
-        <%= link_to "My Reviews", review_path, :class => 'unfollow-btn' %>
+        <%# link_to "My Reviews", review_path, :class => 'unfollow-btn' %>
       <% end %>
     </div>
-    <% if user_signed_in? %>
-      <div class="logout-btn">
-        <%= button_to("Log Out", destroy_user_session_path, method: :delete, :class => 'unfollow-btn') %>
+    <% if @user.role == "regular" %>
+      <div class="favourites">
+        <h3>Favourites</h3>
+          <div class="fav-container">
+            <% @favourites.each do |favourite| %>
+              <div class="container-colour">
+                <% restaurant = Restaurant.find_by(id: favourite.restaurant_id) %>
+                <% if restaurant.photo.attached? %>
+                  <%= cl_image_tag restaurant.photo.key, :class => "image-show-container" %>
+                <% else %>
+                  <div class="no-image">
+                    <h2>No Image</h2>
+                  </div>
+                <% end %>
+                <p id="test"><%= link_to restaurant.name, restaurant_path(restaurant.id) %></p>
+              </div>
+            <% end %>
+          </div>
       </div>
     <% end %>
-  </div>
 </div>

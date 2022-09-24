@@ -7,6 +7,7 @@
     "@hotwired/turbo-rails": "^7.1.3",
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.0",
+    "hammerjs": "^2.0.8",
     "jquery": "^3.6.0",
     "popper.js": "^1.16.1",
     "star-rating.js": "^4.3.0",

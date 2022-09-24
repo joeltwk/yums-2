@@ -1,0 +1,57 @@
+<div class="card">
+  <div>
+    <div class="card-image">
+      <% if restaurant.photo.attached? %>
+        <%= cl_image_tag restaurant.photo.key, :class => "image-show" %>
+      <% else %>
+        <img src="https://res.cloudinary.com/dswoabunp/image/upload/v1659754023/samples/food/dessert.jpg"/>
+      <% end %>
+    </div>
+    <div class="card-body">
+      <h6 class="card-name"><%= restaurant.name %></h6>
+      <% ratings = [] %>
+      <% restaurant.reviews.each do |review| %>
+      <% ratings << review.rating %>
+      <% end %>
+      <% if ratings.count.positive? %>
+        <% avg_rating = (ratings.sum / ratings.count).round(1) %>
+      <% else %>
+        <% avg_rating = "No ratings yet" %>
+      <% end %>
+      <div class="card-rating">
+        <h6>Rating:</h6>
+        <% if avg_rating == "No ratings yet" %>
+          <p><%= avg_rating %></p>
+        <% else %>
+          <p><%= avg_rating %></p>
+          <div class="flex gap-x-1 mb-2 card-stars">
+            <% Review::MAX_RATING.times do |n| %>
+            <%= inline_svg_tag("star.svg",
+              class: "review-star #{star_rating_class(avg_rating, n)}") %>
+            <% end %>
+          </div>
+        <% end %>
+    </div>
+    <div class="card-icons">
+    <i class="fa-solid fa-circle-xmark"></i>
+    <div class="heart-circle">
+      <i class="fa-solid fa-heart card-heart"></i>
+    </div>
+    </div>
+  </div>
+</div>
+<div class="choice d-none">
+    <%= simple_form_for [restaurant, @favourite], defaults: { input_html: { class: 'collection-fave' } } do |f| %>
+      <%= f.input :restaurant_id, input_html: { value: restaurant }, as: :hidden  %>
+      <%= f.input :user_id, input_html: { value: current_user.id }, as: :hidden  %>
+      <%= f.input :location, input_html: { value: "home" }, as: :hidden  %>
+        <%= button_tag(type: 'submit', class:"fav-button collection-fave-btn d-none") do %>
+          <i class="fa-solid fa-heart home-heart"></i>
+        <% end %>
+    <% end %>
+    <%= link_to icon("fa", "play"),
+      collection_path(restaurant),
+      data: {turbo_method: :delete}, :class => "collection-del-btn d-none"
+    %>
+</div>
+</div>
