@@ -7,7 +7,20 @@
             <%= cl_image_tag restaurant.photo.key, :class => "image-show" %>
           <% end %>
           <h4><b><%= link_to restaurant.name, restaurant_path(restaurant)  %></b></h4>
-          <h5><%= restaurant.cuisine %></h5><p><%= restaurant.description %><br><%= link_to "Find out more!", restaurant_path(restaurant) %></p>
+              <% if @rest_rating[restaurant.id].nil? %>
+                <div class="card-rating"><h5><b>No ratings yet</b></h5></div>
+              <% else %>
+                <div class="card-rating"><h5><b>Rating: </b><%= @rest_rating[restaurant.id]  %> &nbsp</h5>
+                  <div class="flex gap-x-1 mb-2">
+                      <% Review::MAX_RATING.times do |n| %>
+                        <%# <%= <i class="fa-light fa-star #{star_rating_class(@avg_rating, n)}"></i> %>
+                        <%= inline_svg_tag("star.svg",
+                          class: "review-star w-8 h-8 #{star_rating_class(@rest_rating[restaurant.id], n)}") %>
+                      <% end %>
+                  </div>
+                </div>
+              <% end %>
+          <p id="overflow-hidden"><%= restaurant.description %><br><%= link_to "Find out more!", restaurant_path(restaurant) %></p>
         <% else %>
           <%= "" %>
         <% end %>

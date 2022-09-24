@@ -1,22 +1,24 @@
 <% @friends.each do |friend| %>
   <% @user = User.find(friend.followee_id) %>
-  <div class="friend-name">
-    <%= @user.name %>
-  </div>
   <% @favourites = Favourite.where(user_id:friend.followee_id) %>
-  <div class="fav-container">
-    <% @favourites.each do |favourite| %>
-      <div class="container-colour">
-        <% restaurant = Restaurant.find_by(id: favourite.restaurant_id) %>
-        <% if restaurant.photo.attached? %>
-          <%= cl_image_tag restaurant.photo.key, :class => "image-show-container" %>
-        <% else %>
-          <div class="no-image">
-            <h2>No Image</h2>
-          </div>
-        <% end %>
-        <p id="test"><%= link_to restaurant.name, restaurant_path(restaurant.id) %></p>
-      </div>
-    <% end %>
-  </div>
+  <% if @favourites.count != 0 %>
+    <div class="friend-name">
+      <%= @user.name %>
+    </div>
+    <div class="fav-container">
+      <% @favourites.each do |favourite| %>
+        <div class="container-colour">
+          <% restaurant = Restaurant.find_by(id: favourite.restaurant_id) %>
+          <% if restaurant.photo.attached? %>
+            <%= cl_image_tag restaurant.photo.key, :class => "image-show-container" %>
+          <% else %>
+            <div class="no-image">
+              <h2>No Image</h2>
+            </div>
+          <% end %>
+          <p id="test"><%= link_to restaurant.name, restaurant_path(restaurant.id) %></p>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 <% end %>

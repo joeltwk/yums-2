@@ -13,33 +13,24 @@ User.destroy_all
 
 puts "Creating users..."
 
-numbers = Array(1..10)
+filepath_users = "db/users.csv"
 
-numbers.each do |x|
-  user = User.create!(
-    name: "User #{x}",
-    email: "user#{x}@email.com",
-    password: "Password123",
-    role: "regular"
+CSV.foreach(filepath_users, headers: :first_row) do |row|
+  user = User.new(
+    name: row[0].to_s,
+    email: row[1].to_s,
+    password: row[2].to_s,
+    role: row[3].to_s
   )
+  user.save
   puts "Created #{user.name}"
-end
-
-numbers.each do |x|
-  owner = User.create!(
-    name: "Owner #{x}",
-    email: "owner#{x}@email.com",
-    password: "Password123",
-    role: "owner"
-  )
-  puts "Created #{owner.name}"
 end
 
 puts "Destroying restaurants..."
 Restaurant.destroy_all
 
 puts "Creating restaurants..."
-filepath = "db/database_test.csv"
+filepath = "db/database.csv"
 
 owners = User.where(role:"owner")
 
