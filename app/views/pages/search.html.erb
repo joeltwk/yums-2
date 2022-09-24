@@ -1,19 +1,29 @@
 
-<%= form_with url: search_path, method: :get, class: "d-flex" do %>
+<%= form_with url: search_path, method: :get, class: "d-flex follow-search-bar" do %>
   <%= text_field_tag :query,
     params[:query],
     class: "form-control",
-    placeholder: "Find a restaurant"
+    placeholder: "Find a restaurant or user"
   %>
-  <%= submit_tag "Search", class: "btn btn-primary" %>
+  <%= button_tag(type: 'submit', class:"follow-search-btn") do %>
+    <i class="fa-solid fa-magnifying-glass"></i>
+  <% end %>
 <% end %>
 
-<div data-controller="tabs" data-tabs-default-tab-value="two">
-  <button id="one" data-tabs-target="btn" data-action="click->tabs#select">Top</button>
-  <button id="two" data-tabs-target="btn" data-action="click->tabs#select">Restaurants</button>
-  <button id="abc" data-tabs-target="btn" data-action="click->tabs#select">Users</button>
-  <div data-tabs-target="tab" id="one">
-    <div class="card-category">
+<% if @users.nil? && @restaurants.nil? %>
+  <div data-controller="tabs" data-tabs-default-tab-value="top" class="tabbtn">
+<% else %>
+  <% if @restaurants.nil? || @restaurants.empty? %>
+    <div data-controller="tabs" data-tabs-default-tab-value="user" class="tabbtn">
+  <% else %>
+    <div data-controller="tabs" data-tabs-default-tab-value="restaurant" class="tabbtn">
+  <% end %>
+<% end %>
+  <button id="top" data-tabs-target="btn" data-action="click->tabs#select">Top</button>
+  <button id="restaurant" data-tabs-target="btn" data-action="click->tabs#select">Restaurants</button>
+  <button id="user" data-tabs-target="btn" data-action="click->tabs#select">Users</button>
+  <div data-tabs-target="tab" id="top">
+    <div class="search-container">
       <div class="content">
         <% @reviews.each do |r| %>
           <div class="cards">
@@ -29,8 +39,8 @@
     </div>
   </div>
 
-  <div data-tabs-target="tab" id="two">
-    <div class="card-category">
+  <div data-tabs-target="tab" id="restaurant">
+    <div class="search-container">
       <div class="content">
         <% if @restaurants.nil? || @restaurants.empty? %>
           <h6>There are no restaurants with that name.</h6>
@@ -50,24 +60,26 @@
     </div>
   </div>
 
-  <div data-tabs-target="tab" id="abc">
-    <div class="card-category">
-      <div class="content">
-        <% if @users.nil? || @users.empty? %>
-          <h6>There are no Users with that name.</h6>
-        <% else %>
-          <% @users.each do |r| %>
-            <div class="cards">
-              <h6><%= link_to r.name, user_path(r) %></h6>
+  <div data-tabs-target="tab" id="user">
+    <% if @users.nil? || @users.empty? %>
+      <h6>There are no Users with that name.</h6>
+    <% else %>
+      <% @users.each do |r| %>
+        <div class="follow-profile-container">
+          <div class="follow-profile">
+            <div class="follow-profile-pic">
               <% if r.photo.attached? %>
-                <%= cl_image_tag r.photo.key, :class => "image-show" %>
+                <%= cl_image_tag r.photo.key, width: 150, height: 150, crop: :thumb, gravity: :face, :class => 'follow-profile-pic' %>
               <% else %>
-                <img src="https://res.cloudinary.com/dswoabunp/image/upload/v1659754023/samples/food/dessert.jpg"/>
+                <div class='follow-no-profile'>
+                <i class="fa-solid fa-user"></i>
+                </div>
               <% end %>
             </div>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
+              <%= link_to r.name, user_path(r), :class => 'follow-name' %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 </div>

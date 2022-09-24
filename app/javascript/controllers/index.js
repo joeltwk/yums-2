@@ -13,8 +13,15 @@ application.register("dropdown", DropdownController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import MapController from "./map_controller"
+application.register("map", MapController)
+
 import StarRatingController from "./star_rating_controller"
 application.register("star-rating", StarRatingController)
 
+import SwiperController from "./swiper_controller"
+application.register("swiper", SwiperController)
+
 import TabsController from "./tabs_controller"
 application.register("tabs", TabsController)
+

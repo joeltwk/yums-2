@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :flats
   require "sidekiq/web"
   authenticate :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => '/sidekiq'
@@ -21,6 +22,7 @@ Rails.application.routes.draw do
     resources :followers, only: %i[index]
     resources :favourites, only: [:show, :index]
     get "restaurants", to: "restaurants#restaurants"
+    get "friends-fave", to:"friends#favourites"
   end
   resources :friends, only: [:destroy]
   resources :reviews, only: %i[show edit update]

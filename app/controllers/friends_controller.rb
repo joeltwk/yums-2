@@ -34,6 +34,11 @@ class FriendsController < ApplicationController
     redirect_to request.referrer
   end
 
+  def favourites
+    @title = "Friend's Favourites"
+    @friends = Friend.where(follower_id:current_user)
+  end
+
   private
 
   def set_user

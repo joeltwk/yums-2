@@ -5,4 +5,13 @@
   <div class="title">
     <span><%= @title %></span>
   </div>
+  <% if user_signed_in? %>
+    <div>
+      <span><%= button_to(icon('fa-solid', 'arrow-right-from-bracket'), destroy_user_session_path, method: :delete, :class => 'logout-btn') %></span>
+    </div>
+  <% else %>
+    <div class="logout-btn">
+      <span><%= link_to icon('fa-solid', 'arrow-right-to-bracket'), new_user_session_path %></span>
+    </div>
+  <% end %>
 </div>
