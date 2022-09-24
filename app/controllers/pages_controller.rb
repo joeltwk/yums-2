@@ -2,10 +2,14 @@ class PagesController < ApplicationController
   before_action :user_login?, only: [:home]
 
   def home
-    if current_user.view_count.nil?
-      @collection = Collection.where(user: current_user).limit(5)
+    if current_user.role == "regular"
+      if current_user.view_count.nil?
+        @collection = Collection.where(user: current_user).limit(5)
+      else
+        @collection = Collection.where(user: current_user).limit(current_user.view_count)
+      end
     else
-      @collection = Collection.where(user: current_user).limit(current_user.view_count)
+      redirect_to user_restaurants_path(current_user)
     end
     @favourite = Favourite.new
     @title = "Recommendations"
