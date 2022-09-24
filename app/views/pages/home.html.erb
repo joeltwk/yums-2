@@ -1,18 +1,18 @@
 <%# <div class="header">
   <h1>Check out these restaurants!</h1>
 </div> %>
-<div id="board" class="deck-container" data-controller="swiper" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    <% @collection.each do |collection| %>
-      <%= render 'restaurants/restaurant_card', restaurant: collection.restaurant %>
-    <% end %>
-    <div class="card-icon-container">
-      <i class="fa-solid fa-heart heart-icon"></i>
-      <i class="fa-solid fa-xmark x-icon"></i>
-    </div>
-</div>
-<div class="out-of-swipes">
-  <%= image_tag("home.png", :alt => "", size: "320x320") %>
-</div>
+  <div id="board" class="deck-container" data-controller="swiper" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      <% @collection.each do |collection| %>
+        <%= render 'restaurants/restaurant_card', restaurant: collection.restaurant %>
+      <% end %>
+      <div class="card-icon-container">
+        <i class="fa-solid fa-heart heart-icon"></i>
+        <i class="fa-solid fa-xmark x-icon"></i>
+      </div>
+  </div>
+  <div class="out-of-swipes">
+    <%= image_tag("home.png", :alt => "", size: "320x320") %>
+  </div>
 
 <%# <div class="swipe-graphic">
   <%= image_tag("swipe.png", :alt => "", size: "300x86") %>
