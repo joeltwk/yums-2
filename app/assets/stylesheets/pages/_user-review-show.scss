@@ -8,14 +8,20 @@ h3 {
   background-color:rgb(250, 244, 232);
   padding: 10px 10px;
   margin: 10px;
+  line-height: 1.2;
 }
 
 #restaurant-link {
-  font-size: 1px;
-  font-weight: bold;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: "Nunito", "Helvetica", "sans-serif";
 }
 
-// a {
-//   font-size: 18px;
-//   font-family: "Nunito", "Helvetica", "sans-serif";
-// }
+.flex gap-x-3 mb-4 {
+  margin-bottom: 20px;
+}
+
+.card-rating {
+  display: flex;
+  align-items: center;
+}

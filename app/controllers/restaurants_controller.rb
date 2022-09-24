@@ -22,7 +22,6 @@ class RestaurantsController < ApplicationController
       @avg_rating = "No ratings yet"
     end
     @review = Review.new
-        # The `geocoded` scope filters only flats with coordinates
 
     @markers =
       [{
@@ -30,13 +29,26 @@ class RestaurantsController < ApplicationController
         lng: @restaurant.longitude,
         info_window: render_to_string(partial: "info_window", locals: { restaurant: @restaurant })
       }]
-
   end
 
   def index
     @title = "All Restaurants"
     @tab = 1
     @restaurants = Restaurant.all
+    @rest_rating = {}
+
+    @restaurants.each do |rest|
+      @ratings = []
+      rest.reviews.each do |review|
+        @ratings << review.rating
+      end
+      if @ratings.count.positive?
+        @avg_rating = @ratings.sum.fdiv(@ratings.count).round(1)
+        @rest_rating[rest.id]= @avg_rating
+      else
+        @avg_rating = "No ratings yet"
+      end
+    end
   end
 
   def new
@@ -45,6 +57,20 @@ class RestaurantsController < ApplicationController
 
   def restaurants
     @restaurants = Restaurant.where(user_id: params[:user_id])
+    @rest_rating = {}
+
+    @restaurants.each do |rest|
+      @ratings = []
+      rest.reviews.each do |review|
+        @ratings << review.rating
+      end
+      if @ratings.count.positive?
+        @avg_rating = @ratings.sum.fdiv(@ratings.count).round(1)
+        @rest_rating[rest.id]= @avg_rating
+      else
+        @avg_rating = "No ratings yet"
+      end
+    end
   end
 
   def create
