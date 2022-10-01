@@ -13,6 +13,6 @@ class CollectionsController < ApplicationController
 
   private
   def set_collection
-    @collection = Collection.find(params[:id])
+    @collection = Collection.find_by(restaurant_id: params[:id])
   end
 end
